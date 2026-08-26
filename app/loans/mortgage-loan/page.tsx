@@ -434,7 +434,7 @@ export default function MortgageLoanPage() {
               Unlock Your
 
               <span className="block text-[#00C6FF]">
-                Property's
+                Property&apos;s
               </span>
 
               <span className="block">
