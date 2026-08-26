@@ -1,4 +1,8 @@
-"use client";
+
+            </p>
+
+            <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-[#171C5C] sm:text-5xl">
+              Why consider "use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -554,11 +558,7 @@ export default function HomeLoanPage() {
           <div className="max-w-[760px]">
 
             <p className="text-sm font-bold uppercase tracking-[0.15em] text-[#20AEE5]">
-              BENEFITS
-            </p>
-
-            <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-[#171C5C] sm:text-5xl">
-              Why consider a home loan?
+              BENEFITSa home loan?
             </h2>
 
             <p className="mt-5 text-lg leading-8 text-slate-600">
