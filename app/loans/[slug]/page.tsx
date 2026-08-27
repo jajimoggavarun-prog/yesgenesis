@@ -37,7 +37,7 @@ const loanDetails: Record<string, { title: string; description: string }> = {
   },
 };
 export function generateStaticParams() {
-  return Object.keys(loanDetails).map((slug) => ({ slug }));
+  return [{ slug: "personal-loan" }];
 }
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
