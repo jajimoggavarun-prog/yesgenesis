@@ -11,33 +11,31 @@ const loanDetails: Record<string, { title: string; description: string }> = {
     description:
       "Quick, collateral-free personal loans sourced from our network of partner banks and NBFCs — for weddings, medical needs, travel, or any personal expense.",
   },
-  "business-loan": {
-    title: "Business Loan",
-    description:
-      "Working capital and growth funding for small and medium businesses, matched to the lender offering the best rate for your profile.",
-  },
+
   "home-loan": {
     title: "Home Loan",
     description:
       "Competitive home loan offers compared across multiple banks, with end-to-end documentation and approval support.",
   },
+
   "mortgage-loan": {
     title: "Mortgage Loan",
     description:
       "Loan against property solutions that unlock funds using your residential or commercial property as collateral.",
   },
+
   "car-loan": {
     title: "Car Loan",
     description:
       "New and used car financing with fast approvals and flexible tenures from our banking and NBFC partners.",
   },
+
   "education-loan": {
     title: "Education Loan",
     description:
       "Funding for higher education in India and abroad, including tuition, living expenses, and other approved costs.",
   },
 };
-
 export function generateStaticParams() {
   return Object.keys(loanDetails).map((slug) => ({ slug }));
 }
