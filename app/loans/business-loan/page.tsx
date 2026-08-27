@@ -1,477 +1,731 @@
-import Image from "next/image";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+"use client";
 
-const eligibilityCards = [
-  {
-    title: "Salaried / Professional",
-    points: [
-      "Regular monthly income",
-      "Stable employment profile",
-      "Age 21 years & above",
-      "Valid KYC documents",
-    ],
-    icon: "₹",
-  },
-  {
-    title: "Self-Employed / Business Owner",
-    points: [
-      "Established business profile",
-      "ITR / financial documents",
-      "Age 21 years & above",
-      "Valid KYC documents",
-    ],
-    icon: "▣",
-  },
-];
+import Link from "next/link";
+import { FormEvent, useState } from "react";
+import Navbar from "@/components/Navbar";
+
+const GOOGLE_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbydxLXPj5igse4DkmHYQdQZeSP_40j29P6DDzrihygsvBVO6iwm92j8A2yaDr-uwlm0/exec";
 
 const benefits = [
   {
-    value: "1000+",
-    title: "Happy Customers",
-    icon: "👥",
-  },
-  {
-    value: "50+",
-    title: "Banking Partners",
-    icon: "▤",
-  },
-  {
-    value: "20+",
-    title: "NBFC Partners",
-    icon: "%",
-  },
-  {
-    value: "₹10 Cr",
-    title: "Loan Amount",
-    icon: "₹",
-  },
-  {
-    value: "Flexible",
-    title: "Repayment",
-    icon: "↻",
-  },
-  {
-    value: "100%",
-    title: "Paperless Process",
-    icon: "✓",
-  },
-];
-
-const processSteps = [
-  {
     number: "01",
-    title: "Quick",
-    subtitle: "Registration",
-    description:
-      "Submit your basic details through our simple application process.",
+    title: "Competitive Rates",
+    text: "Explore suitable business finance options through our trusted network of banks and NBFCs.",
   },
   {
     number: "02",
-    title: "Check",
-    subtitle: "Eligibility",
-    description:
-      "Our team evaluates your profile and available loan options.",
+    title: "Flexible Tenure",
+    text: "Choose repayment options based on your business profile and lender eligibility.",
   },
   {
     number: "03",
-    title: "Submit",
-    subtitle: "Documents",
-    description:
-      "Provide the required financial and KYC documents.",
+    title: "Multiple Lenders",
+    text: "Compare suitable lending options instead of relying on a single lender.",
   },
   {
     number: "04",
-    title: "Bank",
-    subtitle: "Verification",
-    description:
-      "The selected lender verifies your application and documents.",
-  },
-  {
-    number: "05",
-    title: "Loan",
-    subtitle: "Sanction",
-    description:
-      "Once approved, the lender proceeds with sanction and disbursal.",
+    title: "Simple Process",
+    text: "Get assistance through documentation, verification and the application journey.",
   },
 ];
 
-const businessAdvantages = [
-  "Multiple lending options",
-  "Dedicated loan assistance",
-  "Simple documentation process",
-  "Paperless application support",
-  "Flexible repayment options",
-  "Support throughout the application",
+const solutions = [
+  "Business expansion",
+  "Working capital requirements",
+  "Equipment and machinery",
+  "Inventory and stock funding",
+  "Business infrastructure",
+  "Other eligible business needs",
+];
+
+const eligibility = [
+  "Indian citizen",
+  "Business operating for the required lender-defined period",
+  "Stable business income",
+  "Salaried/self-employed/business owner as applicable",
+  "Valid identity and address proof",
+  "Subject to lender-specific eligibility criteria",
+];
+
+const documents = [
+  "PAN Card",
+  "Aadhaar Card / Address Proof",
+  "Business registration documents",
+  "Bank account statements",
+  "Income / financial documents",
+  "Additional lender-required documents",
+];
+
+const steps = [
+  {
+    number: "01",
+    title: "Apply",
+    description:
+      "Submit your basic details and tell us about your business finance requirement.",
+  },
+  {
+    number: "02",
+    title: "Profile Review",
+    description:
+      "Our team reviews your information and identifies suitable lending options.",
+  },
+  {
+    number: "03",
+    title: "Verification",
+    description:
+      "The selected lender evaluates your business profile and documentation.",
+  },
+  {
+    number: "04",
+    title: "Disbursement",
+    description:
+      "Once approved, the loan amount is processed according to lender terms.",
+  },
+];
+
+const faqs = [
+  {
+    question: "What is a business loan?",
+    answer:
+      "A business loan is financing that eligible businesses can use for approved requirements such as expansion, working capital, equipment or other business-related expenses.",
+  },
+  {
+    question: "How much business loan can I get?",
+    answer:
+      "The eligible loan amount depends on factors such as business turnover, income, credit profile, repayment capacity, business vintage and the lender's policies.",
+  },
+  {
+    question: "Can self-employed business owners apply?",
+    answer:
+      "Yes. Eligible self-employed and business owners may apply subject to income documentation, business details, credit profile and lender-specific criteria.",
+  },
+  {
+    question: "What documents are required?",
+    answer:
+      "Typical requirements include KYC documents, business proof, bank statements, income or financial documents and other documents requested by the lender.",
+  },
 ];
 
 export default function BusinessLoanPage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [showForm, setShowForm] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+
+  const [name, setName] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const cleanName = name.trim();
+    const cleanMobile = mobile.replace(/\s/g, "");
+    const cleanEmail = email.trim();
+
+    if (!cleanName) {
+      alert("Please enter your name.");
+      return;
+    }
+
+    if (!/^[6-9]\d{9}$/.test(cleanMobile)) {
+      alert("Please enter a valid 10-digit Indian mobile number.");
+      return;
+    }
+
+    if (
+      cleanEmail &&
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)
+    ) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
+    try {
+      setSubmitting(true);
+
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        },
+        body: JSON.stringify({
+          name: cleanName,
+          mobile: cleanMobile,
+          email: cleanEmail,
+          loanType: "Business Loan",
+          message: message.trim(),
+          source: "Business Loan",
+        }),
+      });
+
+      setSubmitted(true);
+      setName("");
+      setMobile("");
+      setEmail("");
+      setMessage("");
+    } catch {
+      setSubmitted(true);
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
   return (
-    <main className="min-h-screen bg-white text-[#16163f]">
+    <main className="min-h-screen bg-white text-[#171C5C]">
+      <style jsx global>{`
+        @keyframes businessReveal {
+          from {
+            opacity: 0;
+            transform: translateY(35px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes businessFloat {
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+
+          50% {
+            transform: translateY(-14px);
+          }
+        }
+
+        @keyframes businessOrbit {
+          from {
+            transform: rotate(0deg);
+          }
+
+          to {
+            transform: rotate(360deg);
+          }
+        }
+
+        @keyframes businessPulse {
+          0%,
+          100% {
+            transform: scale(1);
+            opacity: 0.55;
+          }
+
+          50% {
+            transform: scale(1.08);
+            opacity: 0.8;
+          }
+        }
+
+        .business-reveal {
+          animation: businessReveal 0.8s ease-out both;
+        }
+
+        .business-float {
+          animation: businessFloat 5s ease-in-out infinite;
+        }
+
+        .business-orbit {
+          animation: businessOrbit 26s linear infinite;
+        }
+
+        .business-pulse {
+          animation: businessPulse 4s ease-in-out infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .business-reveal,
+          .business-float,
+          .business-orbit,
+          .business-pulse {
+            animation: none !important;
+          }
+        }
+      `}</style>
+
       <Navbar />
 
       {/* =========================================================
-          BUSINESS LOAN HERO
-          Reference: Personal Loan Hero
+          HERO
       ========================================================= */}
-      <section className="relative min-h-[720px] overflow-hidden bg-[#061A70]">
-        {/* Business Loan artwork */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage:
-              "url('/assets/business-loan-visual.png')",
-          }}
-        />
 
-        {/* Left-side readability overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#061A70] via-[#061A70]/95 to-transparent" />
+      <section className="relative overflow-hidden bg-[#071B72]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_35%,rgba(0,198,255,.20),transparent_34%)]" />
 
-        {/* Subtle bottom glow */}
-        <div className="pointer-events-none absolute -bottom-60 -left-40 h-[600px] w-[600px] rounded-full bg-[#073AAB]/30 blur-3xl" />
+        <div className="absolute -right-[280px] -top-[280px] h-[720px] w-[720px] rounded-full border border-[#00C6FF]/15" />
 
-        {/* Content */}
-        <div className="relative z-10 mx-auto flex min-h-[720px] max-w-[1440px] items-center px-6 py-16 sm:px-10 lg:px-[80px] xl:px-[120px]">
-          <div className="w-full max-w-[760px]">
-            {/* Eyebrow */}
-            <p className="mb-5 text-sm font-bold uppercase tracking-[0.16em] text-[#2EB9F0] sm:text-base">
+        <div className="absolute bottom-[-250px] left-[-180px] h-[520px] w-[520px] rounded-full bg-[#073AAB]/40 blur-3xl" />
+
+        <div className="mx-auto grid min-h-[720px] max-w-[1500px] items-center gap-12 px-6 py-16 lg:grid-cols-[1.05fr_.95fr] lg:px-10">
+          {/* LEFT */}
+
+          <div className="business-reveal relative z-10 max-w-[720px]">
+            <p className="mb-5 text-sm font-bold uppercase tracking-[0.18em] text-[#00C6FF]">
               Business Finance
             </p>
 
-            {/* Main heading */}
-            <h1 className="text-[48px] font-extrabold leading-[0.98] tracking-[-0.025em] text-white sm:text-[58px] md:text-[68px] lg:text-[76px]">
-              Avail Up To
-
-              <span className="block text-[#36B8F0]">
-                ₹10 Cr Business Loan
-              </span>
-
-              <span className="block">
-                In Just a Few
-              </span>
-
-              <span className="block">
-                Clicks!
-              </span>
+            <h1 className="text-5xl font-extrabold leading-[0.98] tracking-[-0.04em] text-white sm:text-6xl lg:text-[70px]">
+              Grow Your
+              <span className="block text-[#39B5E8]">Business</span>
+              <span className="block">With The Right Finance</span>
             </h1>
 
-            {/* Supporting copy */}
-            <p className="mt-7 max-w-[760px] text-base font-medium leading-7 text-white sm:text-lg">
-              100% Paperless Process{" "}
-              <span className="text-white/45">|</span>{" "}
-              Flexible Tenure{" "}
-              <span className="text-white/45">|</span>{" "}
-              Competitive Interest Rates
+            <div className="mt-7 h-1 w-24 bg-[#00C6FF]" />
+
+            <p className="mt-7 max-w-[680px] text-lg font-medium leading-8 text-white/85 sm:text-xl">
+              Access suitable business loan options through our trusted
+              network of banks and NBFCs with guidance throughout the
+              application process.
             </p>
 
-            {/* CTA */}
-            <a
-              href="/apply"
-              className="mt-8 inline-flex h-[56px] items-center justify-center rounded-[14px] bg-[#36B8F0] px-9 text-base font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#43C2F4] hover:shadow-[0_12px_30px_rgba(54,184,240,0.25)]"
-            >
-              Apply for Business Loan
-            </a>
+            <div className="mt-8 flex flex-wrap gap-5 text-sm font-semibold text-white/65">
+              <span>✓ Paperless Process</span>
+              <span>✓ Flexible Tenure</span>
+              <span>✓ Competitive Rates</span>
+            </div>
 
-            {/* Disclaimer */}
-            <p className="mt-4 max-w-[680px] text-xs leading-5 text-white/55">
+            <div className="mt-9 flex flex-wrap gap-4">
+              <button
+                onClick={() => {
+                  setSubmitted(false);
+                  setShowForm(true);
+                }}
+                className="group rounded-xl bg-[#39B5E8] px-9 py-4 text-lg font-bold text-white shadow-[0_15px_40px_rgba(0,198,255,.18)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#27A7DB] hover:shadow-[0_20px_50px_rgba(0,198,255,.3)]"
+              >
+                Apply for Business Loan
+                <span className="ml-2 inline-block transition-transform group-hover:translate-x-1">
+                  →
+                </span>
+              </button>
+
+              <Link
+                href="/emi-calculator"
+                className="rounded-xl border-2 border-[#00C6FF] px-9 py-4 text-lg font-bold text-[#00C6FF] transition-all duration-300 hover:-translate-y-1 hover:bg-[#00C6FF] hover:text-[#071B72]"
+              >
+                Calculate EMI
+              </Link>
+            </div>
+
+            <p className="mt-5 max-w-[620px] text-xs leading-5 text-white/50">
               Loan approval and terms are subject to lender eligibility,
               documentation and verification.
             </p>
           </div>
-        </div>
-      </section>
 
-      {/* =========================================================
-          ELIGIBILITY
-      ========================================================= */}
-      <section className="bg-[#16163F] px-6 py-20 sm:px-10 lg:px-16 xl:px-[120px]">
-        <div className="mx-auto max-w-[1190px]">
-          <div className="mb-12 text-center">
-            <p className="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-[#33A7DD]">
-              Eligibility
-            </p>
+          {/* RIGHT VISUAL */}
 
-            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Business Loan Eligibility Criteria
-            </h2>
+          <div className="relative flex min-h-[520px] items-center justify-center">
+            <div className="business-float relative w-full max-w-[650px]">
+              {/* glow */}
 
-            <p className="mx-auto mt-4 max-w-[680px] text-sm leading-6 text-white/70 sm:text-base">
-              Eligibility requirements may vary depending on the lender,
-              applicant profile, business type and financial documents.
-            </p>
-          </div>
+              <div className="business-pulse absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#00C6FF]/15 blur-3xl" />
 
-          <div className="grid gap-7 lg:grid-cols-2">
-            {eligibilityCards.map((card) => (
-              <div
-                key={card.title}
-                className="relative min-h-[340px] overflow-hidden rounded-[18px] bg-white shadow-[0_10px_30px_rgba(0,0,0,0.15)]"
-              >
-                <div className="flex min-h-[76px] items-center bg-[#33A7DD] px-7 sm:px-9">
-                  <h3 className="text-xl font-bold text-white sm:text-2xl">
-                    {card.title}
-                  </h3>
-                </div>
+              {/* orbit */}
 
-                <div className="relative p-7 sm:p-9">
-                  <ul className="space-y-5">
-                    {card.points.map((point) => (
-                      <li
-                        key={point}
-                        className="flex items-start gap-3 text-base font-medium leading-6 text-[#011251]"
-                      >
-                        <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#33A7DD]/15 text-xs font-bold text-[#33A7DD]">
-                          ✓
-                        </span>
+              <div className="business-orbit absolute left-1/2 top-1/2 h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#00C6FF]/15" />
 
-                        <span>{point}</span>
-                      </li>
-                    ))}
-                  </ul>
+              {/* main dashboard */}
 
-                  <div className="absolute bottom-5 right-7 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#EEF8FD] text-2xl font-bold text-[#33A7DD]">
-                    {card.icon}
+              <div className="relative mx-auto w-[84%] rounded-[36px] border border-white/20 bg-white/10 p-5 shadow-2xl backdrop-blur-xl sm:p-7">
+                <div className="overflow-hidden rounded-[28px] bg-white shadow-2xl">
+                  {/* dashboard header */}
+
+                  <div className="flex items-center justify-between border-b border-gray-100 px-6 py-5">
+                    <div>
+                      <p className="text-[10px] font-bold tracking-[0.2em] text-[#39B5E8]">
+                        BUSINESS FINANCE
+                      </p>
+
+                      <p className="mt-1 text-lg font-extrabold text-[#171C5C]">
+                        Business Dashboard
+                      </p>
+                    </div>
+
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E8F8FC] text-[#39B5E8]">
+                      ₹
+                    </div>
+                  </div>
+
+                  {/* graph */}
+
+                  <div className="relative h-[280px] overflow-hidden bg-[#F6FBFE] px-6 pt-8">
+                    <div className="flex items-end justify-between">
+                      <div>
+                        <p className="text-xs font-semibold text-gray-400">
+                          Business Growth
+                        </p>
+
+                        <p className="mt-1 text-3xl font-extrabold text-[#171C5C]">
+                          +28.6%
+                        </p>
+                      </div>
+
+                      <div className="rounded-full bg-[#DDF7FD] px-3 py-1 text-xs font-bold text-[#159CCB]">
+                        Growth
+                      </div>
+                    </div>
+
+                    {/* chart */}
+
+                    <div className="absolute bottom-8 left-6 right-6 flex h-[130px] items-end gap-3">
+                      {[38, 55, 48, 70, 64, 92, 110, 125].map(
+                        (height, index) => (
+                          <div
+                            key={index}
+                            className="flex-1 rounded-t-lg bg-[#39B5E8] opacity-80 transition-all duration-500 hover:opacity-100"
+                            style={{
+                              height: `${height}px`,
+                            }}
+                          />
+                        ),
+                      )}
+                    </div>
+
+                    {/* line */}
+
+                    <div className="absolute bottom-[92px] left-[50px] right-[45px] h-[3px] rotate-[-7deg] rounded-full bg-[#171C5C]" />
+
+                    <div className="absolute bottom-[104px] right-[25%] h-4 w-4 rounded-full border-4 border-white bg-[#171C5C] shadow-md" />
+                  </div>
+
+                  {/* cards */}
+
+                  <div className="grid grid-cols-2 gap-3 p-5">
+                    <div className="rounded-2xl bg-[#071B72] p-4 text-white">
+                      <p className="text-[10px] uppercase tracking-widest text-white/50">
+                        Funding
+                      </p>
+
+                      <p className="mt-2 text-xl font-extrabold">
+                        Business
+                      </p>
+
+                      <p className="mt-1 text-xs text-[#39B5E8]">
+                        Finance Ready
+                      </p>
+                    </div>
+
+                    <div className="rounded-2xl bg-[#EAF8FC] p-4">
+                      <p className="text-[10px] uppercase tracking-widest text-gray-400">
+                        Process
+                      </p>
+
+                      <p className="mt-2 text-xl font-extrabold text-[#171C5C]">
+                        Simple
+                      </p>
+
+                      <p className="mt-1 text-xs font-semibold text-[#39B5E8]">
+                        Guided Application
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
 
-          <p className="mt-7 text-center text-xs text-white/50">
-            *Final eligibility and loan amount are determined by the respective
-            lender based on its credit policy.
-          </p>
-        </div>
-      </section>
+              {/* floating cards */}
 
-      {/* =========================================================
-          WHY CHOOSE US
-      ========================================================= */}
-      <section className="bg-[#16163F] px-6 pb-20 sm:px-10 lg:px-16 xl:px-[107px]">
-        <div className="mx-auto max-w-[1205px]">
-          <div className="mb-12 text-center">
-            <p className="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-[#33A7DD]">
-              Why Choose Us?
-            </p>
-
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              Why Choose Yes Genesis Fintech?
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6 lg:gap-5">
-            {benefits.map((benefit) => (
-              <div
-                key={benefit.title}
-                className="group flex min-h-[210px] flex-col items-center justify-between rounded-[16px] bg-white px-4 py-7 text-center shadow-[0_5px_18px_rgba(0,0,0,0.15)] transition-transform duration-200 hover:-translate-y-1"
-              >
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#16163F] text-xl font-bold text-white">
-                  {benefit.icon}
-                </div>
-
-                <div className="mt-5">
-                  <p className="text-lg font-extrabold text-[#16163F]">
-                    {benefit.value}
-                  </p>
-
-                  <p className="mt-2 text-sm font-medium leading-5 text-[#023078]">
-                    {benefit.title}
-                  </p>
-                </div>
+              <div className="absolute left-0 top-[16%] rounded-2xl border border-white/20 bg-white/10 px-5 py-4 text-white shadow-xl backdrop-blur-xl">
+                <p className="text-xs text-white/50">Finance</p>
+                <p className="font-bold">For Growth</p>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* =========================================================
-          BUSINESS FINANCING ADVANTAGES
-      ========================================================= */}
-      <section className="bg-white px-6 py-20 sm:px-10 lg:px-16 xl:px-[107px]">
-        <div className="mx-auto grid max-w-[1220px] items-center gap-12 lg:grid-cols-[1fr_0.9fr]">
-          <div>
-            <p className="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-[#33A7DD]">
-              Business Financing
-            </p>
-
-            <h2 className="max-w-[620px] text-3xl font-bold leading-tight text-[#16163F] sm:text-4xl lg:text-5xl">
-              Finance your business with the right lending option
-            </h2>
-
-            <p className="mt-6 max-w-[650px] text-base leading-7 text-[#4B5563]">
-              Whether you need funds for expansion, working capital,
-              equipment, inventory or other business requirements, our team
-              helps you explore suitable lending options from multiple
-              financial partners.
-            </p>
-
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              {businessAdvantages.map((item) => (
-                <div
-                  key={item}
-                  className="flex items-center gap-3 rounded-xl border border-[#E6E9F2] bg-[#F8FAFF] p-4"
-                >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#33A7DD] text-sm font-bold text-white">
-                    ✓
-                  </span>
-
-                  <span className="text-sm font-semibold text-[#16163F]">
-                    {item}
-                  </span>
-                </div>
-              ))}
+              <div className="absolute bottom-[13%] right-0 rounded-2xl border border-white/20 bg-white/10 px-5 py-4 text-white shadow-xl backdrop-blur-xl">
+                <p className="text-xs text-white/50">Multiple</p>
+                <p className="font-bold">Lender Options</p>
+              </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="relative">
-            <div className="absolute -inset-5 rounded-[30px] bg-[#33A7DD]/10 blur-2xl" />
+      {/* =========================================================
+          BENEFITS
+      ========================================================= */}
 
-            <div className="relative overflow-hidden rounded-[24px] bg-[#EEF6FF] p-8 sm:p-12">
-              <div className="mb-7 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#16163F] text-3xl font-bold text-[#33A7DD]">
-                ₹
+      <section className="px-6 py-24 sm:px-10 lg:px-16">
+        <div className="mx-auto max-w-[1300px]">
+          <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#39B5E8]">
+            Why Choose Us
+          </p>
+
+          <h2 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">
+            Business Loan Benefits
+          </h2>
+
+          <p className="mt-5 max-w-[700px] leading-8 text-gray-600">
+            Get guided through the financing journey while exploring options
+            from our network of lending partners.
+          </p>
+
+          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {benefits.map((item) => (
+              <article
+                key={item.number}
+                className="group rounded-3xl border border-[#171C5C]/10 bg-white p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#39B5E8] hover:shadow-[0_20px_50px_rgba(23,28,92,.1)]"
+              >
+                <span className="text-sm font-extrabold text-[#39B5E8]">
+                  {item.number}
+                </span>
+
+                <div className="mt-8 h-1 w-8 bg-[#39B5E8] transition-all duration-300 group-hover:w-14" />
+
+                <h3 className="mt-6 text-xl font-extrabold">
+                  {item.title}
+                </h3>
+
+                <p className="mt-4 leading-7 text-gray-600">
+                  {item.text}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================
+          SOLUTIONS
+      ========================================================= */}
+
+      <section className="bg-[#F5FAFD] px-6 py-24 sm:px-10 lg:px-16">
+        <div className="mx-auto grid max-w-[1300px] gap-14 lg:grid-cols-[.85fr_1.15fr] lg:items-center">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#39B5E8]">
+              Business Solutions
+            </p>
+
+            <h2 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">
+              Finance That Helps Your Business Move Forward
+            </h2>
+
+            <p className="mt-6 max-w-xl leading-8 text-gray-600">
+              Whether you are expanding operations or managing working capital,
+              explore suitable business financing options through our lender
+              network.
+            </p>
+
+            <button
+              onClick={() => {
+                setSubmitted(false);
+                setShowForm(true);
+              }}
+              className="mt-8 rounded-xl bg-[#071B72] px-7 py-4 font-bold text-white transition hover:-translate-y-1 hover:bg-[#10278A]"
+            >
+              Discuss Your Requirement →
+            </button>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {solutions.map((item, index) => (
+              <div
+                key={item}
+                className="group rounded-2xl border border-white bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+              >
+                <div className="flex items-start justify-between">
+                  <span className="text-sm font-extrabold text-[#39B5E8]">
+                    0{index + 1}
+                  </span>
+
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#EAF8FC] text-[#39B5E8] transition group-hover:bg-[#39B5E8] group-hover:text-white">
+                    →
+                  </span>
+                </div>
+
+                <p className="mt-8 font-extrabold text-[#171C5C]">
+                  {item}
+                </p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-              <h3 className="text-2xl font-bold text-[#16163F]">
-                Funding that supports your next move
-              </h3>
+      {/* =========================================================
+          ELIGIBILITY / DOCUMENTS
+      ========================================================= */}
 
-              <p className="mt-4 text-sm leading-6 text-[#526070]">
-                Get assistance throughout the loan journey, from initial
-                eligibility assessment to documentation and lender
-                verification.
+      <section className="px-6 py-24 sm:px-10 lg:px-16">
+        <div className="mx-auto max-w-[1300px]">
+          <div className="grid gap-8 lg:grid-cols-2">
+            <div className="rounded-[30px] bg-[#071B72] p-8 text-white shadow-xl sm:p-10">
+              <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#39B5E8]">
+                Eligibility
               </p>
 
-              <a
-                href="/apply"
-                className="mt-7 inline-flex rounded-xl bg-[#16163F] px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#22225A]"
-              >
-                Get Started
-              </a>
+              <h2 className="mt-3 text-3xl font-extrabold sm:text-4xl">
+                Business Loan Eligibility
+              </h2>
+
+              <p className="mt-5 leading-7 text-white/65">
+                Eligibility requirements may vary depending on the lender,
+                applicant profile, business type and financial documents.
+              </p>
+
+              <div className="mt-9 space-y-5">
+                {eligibility.map((item) => (
+                  <div key={item} className="flex gap-3">
+                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#39B5E8]/15 text-sm font-bold text-[#39B5E8]">
+                      ✓
+                    </span>
+
+                    <span className="text-white/80">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-[30px] bg-[#F5FAFD] p-8 shadow-sm sm:p-10">
+              <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#39B5E8]">
+                Documentation
+              </p>
+
+              <h2 className="mt-3 text-3xl font-extrabold sm:text-4xl">
+                Documents Generally Required
+              </h2>
+
+              <p className="mt-5 leading-7 text-gray-600">
+                Requirements can vary by lender and applicant profile.
+              </p>
+
+              <div className="mt-9 space-y-5">
+                {documents.map((item, index) => (
+                  <div
+                    key={item}
+                    className="flex items-center gap-4 rounded-xl bg-white p-4 transition hover:-translate-x-1 hover:shadow-md"
+                  >
+                    <span className="font-bold text-[#39B5E8]">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+
+                    <span className="font-semibold text-[#171C5C]">
+                      {item}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
+
+          <p className="mt-7 text-sm leading-6 text-gray-500">
+            Eligibility, interest rates, loan amount, tenure and documentation
+            are subject to the policies and approval criteria of the respective
+            bank or NBFC.
+          </p>
         </div>
       </section>
 
       {/* =========================================================
           HOW IT WORKS
       ========================================================= */}
-      <section className="bg-[#16163F] px-6 py-20 sm:px-10 lg:px-16 xl:px-[107px]">
-        <div className="mx-auto max-w-[1183px]">
-          <div className="mb-14 text-center">
-            <p className="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-[#33A7DD]">
+
+      <section className="bg-[#071B72] px-6 py-24 text-white sm:px-10 lg:px-16">
+        <div className="mx-auto max-w-[1300px]">
+          <div className="max-w-[700px]">
+            <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#39B5E8]">
               Simple Process
             </p>
 
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              How It Works
+            <h2 className="mt-3 text-4xl font-extrabold sm:text-5xl">
+              From Enquiry to Business Finance
             </h2>
 
-            <p className="mx-auto mt-4 max-w-[620px] text-sm leading-6 text-white/65 sm:text-base">
-              A simple step-by-step process designed to make your business
-              loan journey easier.
+            <p className="mt-5 leading-8 text-white/60">
+              Our team helps you navigate the application process and connect
+              with suitable lending options.
             </p>
           </div>
 
-          <div className="relative">
-            <div className="absolute left-[9%] right-[9%] top-[94px] hidden h-px bg-[#33A7DD]/35 lg:block" />
+          <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {steps.map((step) => (
+              <div
+                key={step.number}
+                className="group rounded-3xl border border-white/10 bg-white/5 p-7 transition-all duration-300 hover:-translate-y-2 hover:bg-white/10"
+              >
+                <span className="text-5xl font-extrabold text-[#39B5E8]">
+                  {step.number}
+                </span>
 
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-[40px]">
-              {processSteps.map((step) => (
-                <div
-                  key={step.number}
-                  className="relative z-10 flex flex-col items-center text-center"
-                >
-                  <div className="flex h-[190px] w-full max-w-[190px] flex-col items-center justify-center rounded-[18px] border border-white/10 bg-white p-5 shadow-[0_8px_24px_rgba(0,0,0,0.15)]">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#EAF7FD] text-xl font-extrabold text-[#16163F]">
-                      {step.number}
-                    </div>
+                <div className="mt-7 h-px w-full bg-white/10" />
 
-                    <div className="mt-5 text-lg font-bold text-[#16163F]">
-                      {step.title}
-                    </div>
+                <h3 className="mt-7 text-xl font-extrabold">
+                  {step.title}
+                </h3>
 
-                    <div className="text-lg font-bold text-[#33A7DD]">
-                      {step.subtitle}
-                    </div>
-                  </div>
-
-                  <p className="mt-5 max-w-[180px] text-xs leading-5 text-white/60">
-                    {step.description}
-                  </p>
-                </div>
-              ))}
-            </div>
+                <p className="mt-4 leading-7 text-white/60">
+                  {step.description}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* =========================================================
-          ABOUT YES GENESIS
+          FAQ
       ========================================================= */}
-      <section className="border-b border-[#DFE3ED] bg-white px-6 py-20 sm:px-10 lg:px-16 xl:px-[107px]">
-        <div className="mx-auto grid max-w-[1220px] items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
-          <div>
-            <div className="inline-flex rounded-xl bg-[#16163F] px-5 py-3">
-              <h2 className="text-xl font-bold text-white sm:text-2xl">
-                About Yes Genesis Fintech
-              </h2>
-            </div>
 
-            <p className="mt-7 max-w-[690px] text-base leading-7 text-[#374151]">
-              Yes Genesis Fintech Private Limited is a growing Corporate DSA
-              serving customers across Andhra Pradesh, Telangana and Chennai.
-              We work with a wide network of banks and leading NBFCs to help
-              customers explore suitable financial solutions.
+      <section className="px-6 py-24 sm:px-10 lg:px-16">
+        <div className="mx-auto max-w-[900px]">
+          <div className="text-center">
+            <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#39B5E8]">
+              FAQ
             </p>
 
-            <p className="mt-4 max-w-[690px] text-base leading-7 text-[#374151]">
-              Our services include Personal Loans, Business Loans, Home Loans,
-              Mortgage Loans, Auto Loans, Education Loans, Gold Loans and
-              Insurance.
-            </p>
-
-            <div className="mt-8 grid max-w-[600px] grid-cols-3 overflow-hidden rounded-[16px] bg-[#16163F]">
-              <div className="border-r border-white/10 px-4 py-6 text-center">
-                <p className="text-2xl font-extrabold text-white">60+</p>
-                <p className="mt-1 text-xs font-medium text-white/65">
-                  Branches
-                </p>
-              </div>
-
-              <div className="border-r border-white/10 px-4 py-6 text-center">
-                <p className="text-2xl font-extrabold text-white">50+</p>
-                <p className="mt-1 text-xs font-medium text-white/65">
-                  Banks
-                </p>
-              </div>
-
-              <div className="px-4 py-6 text-center">
-                <p className="text-2xl font-extrabold text-white">20+</p>
-                <p className="mt-1 text-xs font-medium text-white/65">
-                  NBFCs
-                </p>
-              </div>
-            </div>
+            <h2 className="mt-3 text-4xl font-extrabold sm:text-5xl">
+              Business Loan Questions
+            </h2>
           </div>
 
-          <div className="relative flex justify-center lg:justify-end">
-            <div className="relative flex h-[330px] w-full max-w-[420px] items-center justify-center overflow-hidden rounded-[24px] bg-[#EEF7FF]">
-              <div className="absolute h-[250px] w-[250px] rounded-full bg-[#33A7DD]/10" />
+          <div className="mt-12 space-y-3">
+            {faqs.map((faq, index) => {
+              const isOpen = openFaq === index;
 
-              <div className="relative text-center">
-                <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-3xl bg-[#16163F] text-5xl font-bold text-[#33A7DD]">
-                  ₹
+              return (
+                <div
+                  key={faq.question}
+                  className="overflow-hidden rounded-2xl border border-[#171C5C]/10 bg-white transition-all hover:border-[#39B5E8]/50"
+                >
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setOpenFaq(isOpen ? null : index)
+                    }
+                    className="flex w-full items-center justify-between gap-5 p-6 text-left"
+                  >
+                    <span className="font-bold text-[#171C5C]">
+                      {faq.question}
+                    </span>
+
+                    <span
+                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition ${
+                        isOpen
+                          ? "bg-[#39B5E8] text-white"
+                          : "bg-[#EAF8FC] text-[#39B5E8]"
+                      }`}
+                    >
+                      {isOpen ? "−" : "+"}
+                    </span>
+                  </button>
+
+                  <div
+                    className={`grid transition-all duration-300 ${
+                      isOpen
+                        ? "grid-rows-[1fr] opacity-100"
+                        : "grid-rows-[0fr] opacity-0"
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <p className="px-6 pb-6 leading-7 text-gray-600">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-
-                <p className="mt-6 text-xl font-bold text-[#16163F]">
-                  Business Finance
-                </p>
-
-                <p className="mt-2 text-sm text-[#667085]">
-                  Simple. Transparent. Assisted.
-                </p>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -479,35 +733,167 @@ export default function BusinessLoanPage() {
       {/* =========================================================
           FINAL CTA
       ========================================================= */}
-      <section className="relative overflow-hidden bg-[#061A70] px-6 py-20 sm:px-10 lg:px-16">
-        <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full border border-white/10" />
 
-        <div className="absolute -bottom-32 -left-20 h-80 w-80 rounded-full border border-white/10" />
+      <section className="px-6 pb-24 sm:px-10 lg:px-16">
+        <div className="relative mx-auto max-w-[1300px] overflow-hidden rounded-[36px] bg-[#071B72] p-10 text-center text-white sm:p-16">
+          <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#00C6FF]/15 blur-3xl" />
 
-        <div className="relative mx-auto max-w-[950px] text-center">
-          <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#33A7DD]">
-            Ready to Grow?
-          </p>
+          <div className="relative z-10">
+            <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#39B5E8]">
+              Grow With Confidence
+            </p>
 
-          <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-            Get the business funding you need
-          </h2>
+            <h2 className="mx-auto mt-4 max-w-4xl text-4xl font-extrabold tracking-tight sm:text-5xl">
+              Give Your Business the Financial Support It Needs
+            </h2>
 
-          <p className="mx-auto mt-5 max-w-[680px] text-base leading-7 text-white/70">
-            Start your business loan application and let our team help you
-            explore suitable lending options.
-          </p>
+            <p className="mx-auto mt-6 max-w-2xl leading-7 text-white/60">
+              Tell us about your requirement and explore suitable business
+              finance options through our lender network.
+            </p>
 
-          <a
-            href="/apply"
-            className="mt-8 inline-flex h-[56px] items-center justify-center rounded-[14px] bg-[#33A7DD] px-9 text-base font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#43B8EE]"
-          >
-            Apply for Business Loan
-          </a>
+            <button
+              onClick={() => {
+                setSubmitted(false);
+                setShowForm(true);
+              }}
+              className="mt-9 rounded-xl bg-[#39B5E8] px-9 py-4 font-bold text-white shadow-lg transition-all hover:-translate-y-1 hover:bg-[#27A7DB]"
+            >
+              Apply for Business Loan →
+            </button>
+          </div>
         </div>
       </section>
 
-      <Footer />
+      {/* =========================================================
+          ENQUIRY MODAL
+      ========================================================= */}
+
+      {showForm && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-5">
+          <div className="max-h-[90vh] w-full max-w-xl overflow-y-auto rounded-[30px] bg-white p-7 shadow-2xl sm:p-10">
+            <div className="flex items-start justify-between gap-5">
+              <div>
+                <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#39B5E8]">
+                  Business Finance
+                </p>
+
+                <h2 className="mt-2 text-3xl font-extrabold text-[#171C5C]">
+                  Apply Now
+                </h2>
+
+                <p className="mt-2 text-sm text-gray-500">
+                  Tell us about your business finance requirement.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setShowForm(false)}
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-xl text-gray-500 transition hover:bg-gray-200"
+              >
+                ×
+              </button>
+            </div>
+
+            {submitted ? (
+              <div className="py-16 text-center">
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#E8F8FC] text-3xl font-bold text-[#39B5E8]">
+                  ✓
+                </div>
+
+                <h3 className="mt-6 text-2xl font-extrabold text-[#171C5C]">
+                  Thank You!
+                </h3>
+
+                <p className="mt-3 text-gray-600">
+                  Your business loan enquiry has been submitted successfully.
+                </p>
+
+                <button
+                  type="button"
+                  onClick={() => setShowForm(false)}
+                  className="mt-7 rounded-xl bg-[#071B72] px-8 py-3 font-bold text-white transition hover:bg-[#10278A]"
+                >
+                  Close
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+                <div>
+                  <label className="mb-2 block text-sm font-bold text-[#171C5C]">
+                    Full Name
+                  </label>
+
+                  <input
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Enter your full name"
+                    className="w-full rounded-xl border border-gray-200 px-5 py-4 outline-none transition focus:border-[#39B5E8] focus:ring-2 focus:ring-[#39B5E8]/10"
+                  />
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm font-bold text-[#171C5C]">
+                    Mobile Number
+                  </label>
+
+                  <input
+                    value={mobile}
+                    onChange={(e) => setMobile(e.target.value)}
+                    placeholder="10-digit mobile number"
+                    inputMode="numeric"
+                    maxLength={10}
+                    className="w-full rounded-xl border border-gray-200 px-5 py-4 outline-none transition focus:border-[#39B5E8] focus:ring-2 focus:ring-[#39B5E8]/10"
+                  />
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm font-bold text-[#171C5C]">
+                    Email Address
+                  </label>
+
+                  <input
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    type="email"
+                    className="w-full rounded-xl border border-gray-200 px-5 py-4 outline-none transition focus:border-[#39B5E8] focus:ring-2 focus:ring-[#39B5E8]/10"
+                  />
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm font-bold text-[#171C5C]">
+                    Requirement
+                  </label>
+
+                  <textarea
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Tell us about your business loan requirement"
+                    rows={4}
+                    className="w-full resize-none rounded-xl border border-gray-200 px-5 py-4 outline-none transition focus:border-[#39B5E8] focus:ring-2 focus:ring-[#39B5E8]/10"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="w-full rounded-xl bg-[#071B72] px-6 py-4 font-bold text-white transition hover:bg-[#10278A] disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {submitting ? "Submitting..." : "Submit Enquiry"}
+                </button>
+
+                <p className="text-center text-xs leading-5 text-gray-400">
+                  By submitting this form, you agree to be contacted regarding
+                  your enquiry. Loan approval is subject to lender eligibility
+                  and verification.
+                </p>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
     </main>
   );
 }
