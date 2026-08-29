@@ -24,12 +24,12 @@ const features = [
 ];
 
 const eligibility = [
-  "Indian citizen",
-  "Stable income source",
+  "Minimum monthly income of ₹15,000",
+  "Minimum age of 21 years",
+  "Stable source of income",
   "Salaried or self-employed applicant",
-  "Valid KYC documents",
-  "Eligible property ownership",
-  "Subject to lender-specific criteria",
+  "Valid identity and address proof",
+  "Minimum 1 year job stability for salaried applicants",
 ];
 
 const documents = [

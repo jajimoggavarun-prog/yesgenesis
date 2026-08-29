@@ -24,12 +24,12 @@ const features = [
 ];
 
 const eligibility = [
-  "Indian student / applicant",
-  "Admission to an eligible institution",
-  "Academic documentation",
-  "Suitable co-applicant where required",
-  "Income documentation",
-  "Subject to lender-specific criteria",
+  "Minimum monthly income of ₹15,000",
+  "Minimum age of 21 years",
+  "Stable source of income",
+  "Salaried or self-employed applicant",
+  "Valid identity and address proof",
+  "Minimum 1 year job stability for salaried applicants",
 ];
 
 const documents = [

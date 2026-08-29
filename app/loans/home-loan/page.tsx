@@ -40,14 +40,13 @@ const features = [
 ];
 
 const eligibility = [
-  "Indian citizen",
+  "Minimum monthly income of ₹15,000",
+  "Minimum age of 21 years",
   "Stable source of income",
   "Salaried or self-employed applicant",
   "Valid identity and address proof",
-  "Minimum age as specified by lender",
-  "Subject to lender-specific criteria",
+  "Minimum 1 year job stability for salaried applicants",
 ];
-
 const documents = [
   "PAN Card",
   "Aadhaar Card / Address Proof",

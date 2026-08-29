@@ -41,12 +41,12 @@ const solutions = [
 ];
 
 const eligibility = [
-  "Indian citizen",
-  "Business operating for the required lender-defined period",
-  "Stable business income",
-  "Salaried/self-employed/business owner as applicable",
+  "Minimum monthly income of ₹15,000",
+  "Minimum age of 21 years",
+  "Stable source of income",
+  "Salaried or self-employed applicant",
   "Valid identity and address proof",
-  "Subject to lender-specific eligibility criteria",
+  "Minimum 1 year job stability for salaried applicants",
 ];
 
 const documents = [
@@ -544,140 +544,74 @@ export default function BusinessLoanPage() {
         </div>
       </section>
 
-     {/* =========================================================
-    ELIGIBILITY / DOCUMENTS
-========================================================= */}
+{/* =====================================================
+          ELIGIBILITY + DOCUMENTS
+      ===================================================== */}
+      <section className="bg-[#F5F8FC] px-6 py-16 md:px-8 md:py-20">
+        <div className="mx-auto max-w-container">
 
-<section className="bg-[#16163f] px-6 py-16 sm:px-10 lg:px-16">
-  <div className="mx-auto max-w-[1190px]">
-    <div className="mb-12 flex items-center justify-center">
-      <h2 className="text-center text-3xl font-bold leading-tight text-white sm:text-[32px]">
-        Business Loan Eligibility Criteria
-      </h2>
-    </div>
+          <div className="grid gap-8 lg:grid-cols-2">
 
-    <div className="grid gap-[30px] lg:grid-cols-2">
-      {/* Salaried Person */}
-      <div className="relative min-h-[385px] overflow-hidden rounded-tl-[15px] rounded-tr-[15px] rounded-br-[15px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-        <div className="flex h-[72px] w-[72%] items-center justify-center rounded-tl-[15px] bg-[#33a7dd] px-8">
-          <h3 className="text-2xl font-bold text-white sm:text-[30px]">
-            Salaried Person
-          </h3>
-        </div>
+            {/* Eligibility */}
+            <div className="rounded-3xl bg-white p-8 shadow-sm md:p-10">
+              <p className="font-bold uppercase tracking-wider text-[#00AEEA]">
+                Eligibility
+              </p>
 
-        <div className="px-8 pt-10 sm:px-10">
-          <ul className="space-y-5 text-lg font-medium leading-7 text-[#011251] sm:text-[20px]">
-            <li className="list-disc ml-6">
-              Minimum Monthly Salary ₹15,000+
-            </li>
-            <li className="list-disc ml-6">
-              Minimum 1 Year Job Stability
-            </li>
-            <li className="list-disc ml-6">
-              Age: 21 Years &amp; Above
-            </li>
-          </ul>
-        </div>
+              <h2 className="mt-3 text-3xl font-bold">
+                Who can apply?
+              </h2>
 
-        {/* Bottom illustration area */}
-        <div className="pointer-events-none absolute bottom-0 left-0">
-          <div className="flex h-[82px] w-[82px] items-center justify-center bg-[#cfe4ff]/70">
-            <svg
-              viewBox="0 0 64 64"
-              className="h-16 w-16"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M8 28L32 10L56 28V56H8V28Z"
-                stroke="#9fc7ff"
-                strokeWidth="5"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M24 56V36H40V56"
-                stroke="#9fc7ff"
-                strokeWidth="5"
-              />
-            </svg>
+              <div className="mt-8 space-y-4">
+                {eligibility.map((item) => (
+                  <div key={item} className="flex gap-3">
+                    <span className="text-xl font-bold text-[#00C6FF]">
+                      ✓
+                    </span>
+
+                    <span className="text-slate-600">
+                      {item}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Documents */}
+            <div className="rounded-3xl bg-[#071B72] p-8 text-white shadow-sm md:p-10">
+              <p className="font-bold uppercase tracking-wider text-[#00C6FF]">
+                Documentation
+              </p>
+
+              <h2 className="mt-3 text-3xl font-bold">
+                Documents generally required
+              </h2>
+
+              <div className="mt-8 space-y-4">
+                {documents.map((item) => (
+                  <div key={item} className="flex gap-3">
+                    <span className="text-xl font-bold text-[#00C6FF]">
+                      ✓
+                    </span>
+
+                    <span className="text-white/85">
+                      {item}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
-        </div>
 
-        <div className="pointer-events-none absolute bottom-7 right-7">
-          <div className="flex h-[90px] w-[90px] items-end justify-center overflow-hidden bg-[#d7e8ff]">
-            <div className="mb-2 h-12 w-9 rounded-full bg-[#f0b08f]" />
-            <div className="absolute top-3 h-8 w-9 rounded-full bg-[#111827]" />
-            <div className="absolute bottom-0 h-10 w-14 rounded-t-[20px] bg-white border border-[#d7d7d7]" />
-          </div>
-        </div>
-      </div>
+          <p className="mt-6 text-sm leading-6 text-slate-500">
+            Eligibility, interest rates, loan amount, tenure and documentation
+            requirements are subject to the policies and approval criteria of
+            the respective bank or NBFC.
+          </p>
 
-      {/* Self-Employed */}
-      <div className="relative min-h-[385px] overflow-hidden rounded-tl-[15px] rounded-tr-[15px] rounded-br-[15px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-        <div className="flex h-[72px] w-[72%] items-center justify-center rounded-tl-[15px] bg-[#33a7dd] px-8">
-          <h3 className="text-2xl font-bold text-white sm:text-[30px]">
-            Self-Employed
-          </h3>
         </div>
-
-        <div className="px-8 pt-10 sm:px-10">
-          <ul className="space-y-5 text-lg font-medium leading-7 text-[#011251] sm:text-[20px]">
-            <li className="list-disc ml-6">
-              Minimum 1 Year ITR Filing
-            </li>
-            <li className="list-disc ml-6">
-              Age: 21 Years &amp; Above
-            </li>
-          </ul>
-        </div>
-
-        {/* Bottom illustration area */}
-        <div className="pointer-events-none absolute bottom-0 left-0">
-          <div className="flex h-[82px] w-[82px] items-center justify-center bg-[#cfe4ff]/70">
-            <svg
-              viewBox="0 0 64 64"
-              className="h-16 w-16"
-              fill="none"
-              aria-hidden="true"
-            >
-              <rect
-                x="9"
-                y="22"
-                width="46"
-                height="31"
-                rx="5"
-                stroke="#9fc7ff"
-                strokeWidth="5"
-              />
-              <path
-                d="M21 22V16C21 13.2 23.2 11 26 11H38C40.8 11 43 13.2 43 16V22"
-                stroke="#9fc7ff"
-                strokeWidth="5"
-              />
-              <rect
-                x="28"
-                y="31"
-                width="8"
-                height="8"
-                rx="1"
-                stroke="#9fc7ff"
-                strokeWidth="3"
-              />
-            </svg>
-          </div>
-        </div>
-
-        <div className="pointer-events-none absolute bottom-7 right-7">
-          <div className="flex h-[90px] w-[90px] items-end justify-center overflow-hidden bg-[#d7e8ff]">
-            <div className="mb-2 h-12 w-9 rounded-full bg-[#f0b08f]" />
-            <div className="absolute top-3 h-8 w-9 rounded-full bg-[#111827]" />
-            <div className="absolute bottom-0 h-10 w-14 rounded-t-[20px] bg-white border border-[#d7d7d7]" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* =========================================================
           HOW IT WORKS
