@@ -4,7 +4,10 @@ import { heroAssets } from "@/lib/assets";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-navy" aria-labelledby="hero-heading">
+    <section
+      className="relative overflow-hidden bg-navy"
+      aria-labelledby="hero-heading"
+    >
       <div className="absolute inset-0">
         <Image
           src={heroAssets.heroBackground}
@@ -23,7 +26,10 @@ export default function Hero() {
             18+ YEARS OF EXPERIENCE
           </span>
 
-          <h1 id="hero-heading" className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-white">
+          <h1
+            id="hero-heading"
+            className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-white"
+          >
             India&rsquo;s Leading{" "}
             <span className="text-brand-cyan">Loan Distribution</span> Network
           </h1>
@@ -40,8 +46,13 @@ export default function Hero() {
             <Button href="/apply" variant="secondary">
               Apply Now
             </Button>
+
             <Button href="/emi-calculator" variant="outline">
               EMI Calculator
+            </Button>
+
+            <Button href="/cibil-score" variant="outline">
+              Check CIBIL Score
             </Button>
           </div>
         </div>

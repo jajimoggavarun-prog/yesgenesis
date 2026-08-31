@@ -1,4 +1,9 @@
-import { branchAssets, statsAssets } from "./assets";
+import {
+  branchAssets,
+  statsAssets,
+  testimonialAvatar,
+  testimonialAvatar2,
+} from "./assets";
 
 export const siteConfig = {
   name: "Yes Genesis Fintech",
@@ -7,11 +12,12 @@ export const siteConfig = {
     "India's leading loan distribution network. Yes Genesis Fintech connects customers with trusted banks and NBFCs for personal, business, home, mortgage, car and education loans across 200+ cities.",
   phone: "+91 95178 89999",
   email: "info@yesgenesis.in",
-  address: "302, 3rd Floor, Krishna Plaza, Khairatabad, Hyderabad 500004",
+  address:
+    "302, 3rd Floor, Krishna Plaza, Khairatabad, Hyderabad 500004",
   url: "https://www.yesgenesis.in",
 };
 
-// Loans dropdown (CIBIL Score intentionally excluded)
+// Loans dropdown
 export const loanLinks = [
   { label: "Personal Loan", href: "/loans/personal-loan" },
   { label: "Business Loan", href: "/loans/business-loan" },
@@ -21,7 +27,7 @@ export const loanLinks = [
   { label: "Education Loan", href: "/loans/education-loan" },
 ];
 
-// Primary nav (CIBIL Score intentionally excluded)
+// Primary navigation
 export const primaryNav = [
   { label: "Home", href: "/" },
   { label: "Loans", href: "#loans", children: loanLinks },
@@ -29,11 +35,31 @@ export const primaryNav = [
 ];
 
 export const journeyStats = [
-  { value: "200+", label: "Cities Served", icon: statsAssets.icons[0] },
-  { value: "647+", label: "Branch Locations", icon: statsAssets.icons[1] },
-  { value: "4K+", label: "Employees", icon: statsAssets.icons[2] },
-  { value: "149+", label: "Lending Partners", icon: statsAssets.icons[3] },
-  { value: "24K+", label: "Active Connectors", icon: statsAssets.icons[4] },
+  {
+    value: "200+",
+    label: "Cities Served",
+    icon: statsAssets.icons[0],
+  },
+  {
+    value: "647+",
+    label: "Branch Locations",
+    icon: statsAssets.icons[1],
+  },
+  {
+    value: "4K+",
+    label: "Employees",
+    icon: statsAssets.icons[2],
+  },
+  {
+    value: "149+",
+    label: "Lending Partners",
+    icon: statsAssets.icons[3],
+  },
+  {
+    value: "24K+",
+    label: "Active Connectors",
+    icon: statsAssets.icons[4],
+  },
 ];
 
 export type Branch = {
@@ -42,29 +68,72 @@ export type Branch = {
 };
 
 export const branches: Branch[] = [
-  { name: "Khairatabad Branch", image: branchAssets.khairatabad },
-  { name: "Nagaland Branch", image: branchAssets.nagaland },
-  { name: "Bengaluru Branch", image: branchAssets.bengaluru },
-  { name: "Vizag Branch", image: branchAssets.vizag },
-  { name: "Tirupati Branch - A.P", image: branchAssets.tirupati },
-  { name: "Panjagutta Branch", image: branchAssets.panjagutta },
-  { name: "L.B Nagar Branch", image: branchAssets.lbNagar },
-  { name: "Kurnool Branch", image: branchAssets.kurnool },
-  { name: "Chennai Branch", image: branchAssets.chennai },
-  { name: "Mahbubnagar Branch", image: branchAssets.mahbubnagar },
+  {
+    name: "Khairatabad Branch",
+    image: branchAssets.khairatabad,
+  },
+  {
+    name: "Nagaland Branch",
+    image: branchAssets.nagaland,
+  },
+  {
+    name: "Bengaluru Branch",
+    image: branchAssets.bengaluru,
+  },
+  {
+    name: "Tirupati Branch - A.P",
+    image: branchAssets.tirupati,
+  },
+  {
+    name: "Panjagutta Branch",
+    image: branchAssets.panjagutta,
+  },
+  {
+    name: "Vizag Branch",
+    image: branchAssets.vizag,
+  },
+  {
+    name: "L.B Nagar Branch",
+    image: branchAssets.lbNagar,
+  },
+  {
+    name: "Kurnool Branch",
+    image: branchAssets.kurnool,
+  },
+  {
+    name: "Chennai Branch",
+    image: branchAssets.chennai,
+  },
+  {
+    name: "Mahbubnagar Branch",
+    image: branchAssets.mahbubnagar,
+  },
 ];
 
 export const partnerStats = [
-  { value: "150+", label: "Banking Partners" },
-  { value: "65+", label: "NBFC Partners" },
-  { value: "25,000+", label: "Happy Customers" },
-  { value: "Pan India", label: "Service Network" },
+  {
+    value: "150+",
+    label: "Banking Partners",
+  },
+  {
+    value: "65+",
+    label: "NBFC Partners",
+  },
+  {
+    value: "25,000+",
+    label: "Happy Customers",
+  },
+  {
+    value: "Pan India",
+    label: "Service Network",
+  },
 ];
 
 export type Testimonial = {
   name: string;
   quote: string;
   rating: number;
+  avatar?: string;
 };
 
 export const testimonials: Testimonial[] = [
@@ -73,18 +142,23 @@ export const testimonials: Testimonial[] = [
     quote:
       "They are very friendly people to work with. I got a loan at a decent rate which helped me at the time of my emergency. I would be happy to recommend this company to my peers. Keep it up guys! You are doing a great job. I hope everyone should get advantage of this good process of loan.",
     rating: 5,
+    avatar: testimonialAvatar,
   },
+
   {
     name: "Priya Reddy",
     quote:
       "Getting a home loan always seemed complicated, but Yes Genesis Fintech made the entire process stress-free. Their team was patient, answered all my questions, and kept me updated at every stage. I was impressed with how quickly they completed the verification and approval process. Their honest guidance and excellent customer support made a huge difference. Thank you for helping me achieve my dream of owning a home.",
     rating: 5,
+    avatar: testimonialAvatar2,
   },
+
   {
     name: "Amit Verma",
     quote:
       "Choosing Yes Genesis Fintech was one of the best decisions I made during my home loan journey. They compared multiple banks, negotiated the best possible terms, and completed the entire process without any hassle. I was kept informed at every stage, and the staff ensured all documentation was handled accurately. Their dedication, transparency, and quick response made the experience pleasant. I sincerely thank the entire team for their outstanding support.",
     rating: 5,
+    avatar: testimonialAvatar,
   },
 ];
 
@@ -104,7 +178,10 @@ type FooterContactColumn = {
   phone: string;
 };
 
-export const footerColumns: (FooterLinkColumn | FooterContactColumn)[] = [
+export const footerColumns: (
+  | FooterLinkColumn
+  | FooterContactColumn
+)[] = [
   {
     heading: "Loans",
     links: loanLinks,
@@ -112,12 +189,30 @@ export const footerColumns: (FooterLinkColumn | FooterContactColumn)[] = [
   {
     heading: "Information",
     links: [
-      { label: "About Us", href: "/about" },
-      { label: "Contact Us", href: "/contact" },
-      { label: "Privacy & Policy", href: "/privacy-policy" },
-      { label: "Terms & Conditions", href: "/terms-conditions" },
-      { label: "Disclaimer", href: "/disclaimer" },
-      { label: "Apply For Yes Genesis Franchise", href: "/franchise" },
+      {
+        label: "About Us",
+        href: "/about",
+      },
+      {
+        label: "Contact Us",
+        href: "/contact",
+      },
+      {
+        label: "Privacy & Policy",
+        href: "/privacy-policy",
+      },
+      {
+        label: "Terms & Conditions",
+        href: "/terms-conditions",
+      },
+      {
+        label: "Disclaimer",
+        href: "/disclaimer",
+      },
+      {
+        label: "Apply For Yes Genesis Franchise",
+        href: "/franchise",
+      },
     ],
   },
   {
@@ -129,7 +224,16 @@ export const footerColumns: (FooterLinkColumn | FooterContactColumn)[] = [
 ];
 
 export const socialLinks = [
-  { label: "Facebook", href: "https://facebook.com" },
-  { label: "Instagram", href: "https://instagram.com" },
-  { label: "LinkedIn", href: "https://linkedin.com" },
+  {
+    label: "Facebook",
+    href: "https://facebook.com",
+  },
+  {
+    label: "Instagram",
+    href: "https://instagram.com",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://linkedin.com",
+  },
 ];

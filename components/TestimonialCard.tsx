@@ -4,7 +4,11 @@ import { testimonialAvatar } from "@/lib/assets";
 
 function Stars({ count }: { count: number }) {
   return (
-    <div className="flex gap-1" role="img" aria-label={`${count} out of 5 stars`}>
+    <div
+      className="flex gap-1"
+      role="img"
+      aria-label={`${count} out of 5 stars`}
+    >
       {Array.from({ length: 5 }).map((_, i) => (
         <svg
           key={i}
@@ -26,20 +30,32 @@ function Stars({ count }: { count: number }) {
   );
 }
 
-export default function TestimonialCard({ name, quote, rating }: Testimonial) {
+export default function TestimonialCard({
+  name,
+  quote,
+  rating,
+  avatar,
+}: Testimonial) {
   return (
     <blockquote className="flex h-full flex-col justify-between gap-8 rounded-pill bg-midnight-light p-8">
-      <p className="text-sm leading-relaxed text-white/90">{quote}</p>
+      <p className="text-sm leading-relaxed text-white/90">
+        {quote}
+      </p>
+
       <footer className="flex items-center gap-4">
         <Image
-          src={testimonialAvatar}
+          src={avatar || testimonialAvatar}
           alt=""
           width={64}
           height={64}
           className="h-14 w-14 rounded-full object-cover"
         />
+
         <div>
-          <cite className="not-italic font-serif text-base font-bold text-white">{name}</cite>
+          <cite className="not-italic font-serif text-base font-bold text-white">
+            {name}
+          </cite>
+
           <Stars count={rating} />
         </div>
       </footer>

@@ -198,7 +198,7 @@ export default function CibilScorePage() {
             <div className="flex items-center justify-center">
               <div className="relative w-full max-w-[560px]">
                 <img
-                  src="https://www.figma.com/api/mcp/asset/6c5a0d4c-8e6f-4a38-9246-2b11129ccfe7.png"
+                  src="/assets/cibilscore.png"
                   alt="CIBIL Score gauge showing credit score range from 300 to 900"
                   className="h-auto w-full object-contain"
                 />
