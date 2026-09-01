@@ -11,161 +11,196 @@ function formatCurrency(value: number) {
 }
 
 export default function EmiCalculator() {
-  const [principal, setPrincipal] = useState(1000000);
-  const [rate, setRate] = useState(10.5);
-  const [tenureYears, setTenureYears] = useState(5);
+  const [principal, setPrincipal] = useState("1000000");
+  const [rate, setRate] = useState("10.5");
+  const [tenureYears, setTenureYears] = useState("5");
+
+  const principalValue = Number(principal) || 0;
+  const rateValue = Number(rate) || 0;
+  const tenureValue = Number(tenureYears) || 0;
 
   const { emi, totalInterest, totalPayment } = useMemo(() => {
-    const monthlyRate = rate / 12 / 100;
-    const months = tenureYears * 12;
+    if (principalValue <= 0 || tenureValue <= 0) {
+      return {
+        emi: 0,
+        totalInterest: 0,
+        totalPayment: 0,
+      };
+    }
+
+    const monthlyRate = rateValue / 12 / 100;
+    const months = tenureValue * 12;
 
     if (monthlyRate === 0) {
-      const flatEmi = principal / months;
+      const flatEmi = principalValue / months;
 
       return {
         emi: flatEmi,
         totalInterest: 0,
-        totalPayment: principal,
+        totalPayment: principalValue,
       };
     }
 
     const factor = Math.pow(1 + monthlyRate, months);
+
     const emiValue =
-      (principal * monthlyRate * factor) / (factor - 1);
+      (principalValue * monthlyRate * factor) /
+      (factor - 1);
 
     const total = emiValue * months;
 
     return {
       emi: emiValue,
-      totalInterest: total - principal,
+      totalInterest: total - principalValue,
       totalPayment: total,
     };
-  }, [principal, rate, tenureYears]);
+  }, [principalValue, rateValue, tenureValue]);
 
   return (
     <div className="grid gap-8 rounded-pill bg-white p-6 shadow-lg md:p-8 lg:grid-cols-2">
+      {/* =====================================================
+          INPUTS
+      ===================================================== */}
+      <div className="space-y-7">
 
-      {/* LEFT SIDE */}
-      <div className="space-y-6">
-
-        {/* LOAN AMOUNT */}
+        {/* Loan Amount */}
         <div>
           <label
             htmlFor="principal"
-            className="flex justify-between text-sm font-semibold text-midnight"
+            className="mb-2 block text-sm font-semibold text-midnight"
           >
-            <span>Loan Amount</span>
-            <span>{formatCurrency(principal)}</span>
+            Loan Amount
           </label>
 
-          <div className="mt-2 flex items-center overflow-hidden rounded-card border border-gray-200 bg-white">
-            <span className="border-r border-brand-cyan px-4 py-3 text-lg font-semibold text-midnight">
+          <div className="relative">
+            <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-base font-semibold text-gray-500">
               ₹
             </span>
 
             <input
               id="principal"
-              type="number"
-              min={50000}
-              max={10000000}
-              step={10000}
-              value={principal === 0 ? "" : principal}
-              onFocus={(e) => e.target.select()}
+              type="text"
+              inputMode="numeric"
+              value={principal}
               onChange={(e) => {
-                const value = e.target.value;
-
-                if (value === "") {
-                  setPrincipal(0);
-                  return;
-                }
-
-                setPrincipal(Number(value));
+                const value = e.target.value.replace(/\D/g, "");
+                setPrincipal(value);
               }}
-              onBlur={() => {
-                if (principal < 50000) {
-                  setPrincipal(50000);
-                } else if (principal > 10000000) {
-                  setPrincipal(10000000);
-                }
-              }}
-              className="w-full border-0 bg-transparent px-3 py-3 text-lg font-semibold text-midnight outline-none focus:ring-0 [appearance:textfield]"
               placeholder="Enter loan amount"
+              className="w-full rounded-xl border border-gray-300 bg-white py-4 pl-10 pr-4 text-lg font-semibold text-midnight outline-none transition focus:border-brand-cyan focus:ring-2 focus:ring-brand-cyan/20"
             />
           </div>
 
           <p className="mt-2 text-xs text-gray-500">
-            Enter an amount between ₹50,000 and ₹1 crore
+            Enter the amount you want to borrow.
           </p>
         </div>
 
-        {/* INTEREST RATE */}
+        {/* Interest Rate */}
         <div>
           <label
             htmlFor="rate"
-            className="flex justify-between text-sm font-semibold text-midnight"
+            className="mb-2 block text-sm font-semibold text-midnight"
           >
-            <span>Interest Rate (per annum)</span>
-            <span>{rate.toFixed(1)}%</span>
+            Interest Rate (per annum)
           </label>
 
-          <input
-            id="rate"
-            type="range"
-            min={5}
-            max={24}
-            step={0.1}
-            value={rate}
-            onChange={(e) => setRate(Number(e.target.value))}
-            className="mt-2 w-full accent-brand-cyan"
-          />
+          <div className="relative">
+            <input
+              id="rate"
+              type="text"
+              inputMode="decimal"
+              value={rate}
+              onChange={(e) => {
+                const value = e.target.value.replace(/[^0-9.]/g, "");
+
+                // Allow only one decimal point
+                if ((value.match(/\./g) || []).length <= 1) {
+                  setRate(value);
+                }
+              }}
+              placeholder="Enter interest rate"
+              className="w-full rounded-xl border border-gray-300 bg-white px-4 py-4 pr-12 text-lg font-semibold text-midnight outline-none transition focus:border-brand-cyan focus:ring-2 focus:ring-brand-cyan/20"
+            />
+
+            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-base font-semibold text-gray-500">
+              %
+            </span>
+          </div>
+
+          <p className="mt-2 text-xs text-gray-500">
+            Example: 10.5% per annum.
+          </p>
         </div>
 
-        {/* TENURE */}
+        {/* Tenure */}
         <div>
           <label
             htmlFor="tenure"
-            className="flex justify-between text-sm font-semibold text-midnight"
+            className="mb-2 block text-sm font-semibold text-midnight"
           >
-            <span>Tenure</span>
-            <span>{tenureYears} yrs</span>
+            Loan Tenure
           </label>
 
-          <input
-            id="tenure"
-            type="range"
-            min={1}
-            max={30}
-            step={1}
-            value={tenureYears}
-            onChange={(e) => setTenureYears(Number(e.target.value))}
-            className="mt-2 w-full accent-brand-cyan"
-          />
+          <div className="relative">
+            <input
+              id="tenure"
+              type="text"
+              inputMode="numeric"
+              value={tenureYears}
+              onChange={(e) => {
+                const value = e.target.value.replace(/\D/g, "");
+                setTenureYears(value);
+              }}
+              placeholder="Enter tenure"
+              className="w-full rounded-xl border border-gray-300 bg-white px-4 py-4 pr-16 text-lg font-semibold text-midnight outline-none transition focus:border-brand-cyan focus:ring-2 focus:ring-brand-cyan/20"
+            />
+
+            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-base font-semibold text-gray-500">
+              Years
+            </span>
+          </div>
+
+          <p className="mt-2 text-xs text-gray-500">
+            Enter the repayment period in years.
+          </p>
         </div>
+
+        {/* Quick validation */}
+        {(principalValue <= 0 ||
+          rateValue < 0 ||
+          tenureValue <= 0) && (
+          <p className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-600">
+            Please enter a valid loan amount, interest rate and tenure.
+          </p>
+        )}
       </div>
 
-      {/* RIGHT SIDE */}
-      <div className="flex flex-col justify-center gap-6 rounded-card bg-midnight-light p-6 text-white">
+      {/* =====================================================
+          EMI RESULT
+      ===================================================== */}
+      <div className="flex flex-col justify-center gap-6 rounded-card bg-midnight-light p-6 text-white md:p-8">
 
-        {/* MONTHLY EMI */}
+        {/* Monthly EMI */}
         <div>
           <p className="text-sm text-white/70">
             Monthly EMI
           </p>
 
-          <p className="text-3xl font-bold text-brand-cyan">
+          <p className="mt-1 text-3xl font-bold text-brand-cyan md:text-4xl">
             {formatCurrency(emi)}
           </p>
         </div>
 
-        {/* TOTALS */}
-        <div className="grid grid-cols-2 gap-4">
+        {/* Summary */}
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
 
           <div>
             <p className="text-sm text-white/70">
               Total Interest
             </p>
 
-            <p className="text-lg font-semibold">
+            <p className="mt-1 text-lg font-semibold">
               {formatCurrency(totalInterest)}
             </p>
           </div>
@@ -175,15 +210,49 @@ export default function EmiCalculator() {
               Total Payment
             </p>
 
-            <p className="text-lg font-semibold">
+            <p className="mt-1 text-lg font-semibold">
               {formatCurrency(totalPayment)}
             </p>
           </div>
 
         </div>
 
-        <p className="text-xs text-white/50">
-          This is an indicative estimate. Actual EMI may vary by lender.
+        {/* Loan Summary */}
+        <div className="border-t border-white/10 pt-5">
+          <div className="flex justify-between gap-4 text-sm">
+            <span className="text-white/60">
+              Loan Amount
+            </span>
+
+            <span className="font-semibold">
+              {formatCurrency(principalValue)}
+            </span>
+          </div>
+
+          <div className="mt-3 flex justify-between gap-4 text-sm">
+            <span className="text-white/60">
+              Interest Rate
+            </span>
+
+            <span className="font-semibold">
+              {rateValue > 0 ? `${rateValue}%` : "—"}
+            </span>
+          </div>
+
+          <div className="mt-3 flex justify-between gap-4 text-sm">
+            <span className="text-white/60">
+              Tenure
+            </span>
+
+            <span className="font-semibold">
+              {tenureValue > 0 ? `${tenureValue} Years` : "—"}
+            </span>
+          </div>
+        </div>
+
+        <p className="text-xs leading-5 text-white/50">
+          This is an indicative estimate. Actual EMI may vary by lender,
+          interest rate, tenure and other applicable charges.
         </p>
       </div>
     </div>

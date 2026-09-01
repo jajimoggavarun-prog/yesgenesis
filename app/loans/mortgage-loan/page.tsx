@@ -8,10 +8,26 @@ const GOOGLE_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbydxLXPj5igse4DkmHYQdQZeSP_40j29P6DDzrihygsvBVO6iwm92j8A2yaDr-uwlm0/exec";
 
 const benefits = [
-  ["01", "Property Backed", "Unlock financial potential from eligible property."],
-  ["02", "Flexible Tenure", "Choose repayment options based on lender eligibility."],
-  ["03", "Multiple Lenders", "Explore suitable options across our lending network."],
-  ["04", "Dedicated Assistance", "Get support through documentation and lender coordination."],
+  {
+    number: "01",
+    title: "Property Backed",
+    text: "Unlock financial potential from eligible property.",
+  },
+  {
+    number: "02",
+    title: "Flexible Tenure",
+    text: "Choose repayment options based on lender eligibility.",
+  },
+  {
+    number: "03",
+    title: "Multiple Lenders",
+    text: "Explore suitable options across our lending network.",
+  },
+  {
+    number: "04",
+    title: "Dedicated Assistance",
+    text: "Get support through documentation and lender coordination.",
+  },
 ];
 
 const features = [
@@ -141,46 +157,19 @@ export default function MortgageLoanPage() {
             opacity: 0;
             transform: translateY(30px);
           }
+
           to {
             opacity: 1;
             transform: translateY(0);
           }
         }
 
-        @keyframes mortgageFloat {
-          0%, 100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-15px);
-          }
-        }
-
-        @keyframes mortgageOrbit {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-
         .mortgage-reveal {
-          animation: mortgageReveal .8s ease-out both;
-        }
-
-        .mortgage-float {
-          animation: mortgageFloat 5s ease-in-out infinite;
-        }
-
-        .mortgage-orbit {
-          animation: mortgageOrbit 25s linear infinite;
+          animation: mortgageReveal 0.8s ease-out both;
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .mortgage-reveal,
-          .mortgage-float,
-          .mortgage-orbit {
+          .mortgage-reveal {
             animation: none !important;
           }
         }
@@ -188,29 +177,42 @@ export default function MortgageLoanPage() {
 
       <Navbar />
 
-      <section className="relative overflow-hidden bg-[#071B72]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_32%,rgba(0,198,255,.18),transparent_32%)]" />
-        <div className="absolute -right-[260px] -top-[300px] h-[760px] w-[760px] rounded-full border border-[#00C6FF]/20" />
+      {/* =====================================================
+          MORTGAGE LOAN HERO
+          Background:
+          /public/assets/mortgage-loan-visual.png
+      ===================================================== */}
+      <section
+        className="relative min-h-[720px] overflow-hidden bg-[#061A70] bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: 'url("/assets/mortgage-loan-visual.png")',
+        }}
+      >
+        {/* Subtle overlay keeps the left-side text readable */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#061A70]/20 via-[#061A70]/5 to-transparent" />
 
-        <div className="mx-auto grid min-h-[700px] max-w-[1500px] items-center gap-12 px-6 py-16 lg:grid-cols-[1.05fr_.95fr] lg:px-10">
-          <div className="mortgage-reveal relative z-10 max-w-[720px]">
-            <p className="mb-5 text-sm font-bold tracking-[.16em] text-[#00C6FF]">
-              YES GENESIS FINTECH
+        <div className="relative z-10 mx-auto flex min-h-[720px] max-w-container items-center px-6 py-16 md:px-8">
+          <div className="mortgage-reveal w-full max-w-[720px]">
+            <p className="mb-5 text-sm font-bold uppercase tracking-[0.16em] text-[#2EB9F0] md:text-base">
+              PROPERTY FINANCE
             </p>
 
-            <h1 className="text-5xl font-extrabold leading-[.98] tracking-[-.04em] text-white sm:text-6xl lg:text-[70px]">
+            <h1 className="text-[48px] font-extrabold leading-[0.98] tracking-[-0.025em] text-white sm:text-[58px] md:text-[68px] lg:text-[76px]">
               Unlock Your
-              <span className="block text-[#39B5E8]">
+              <span className="block text-[#36B8F0]">
                 Property&apos;s
               </span>
-              <span className="block">Financial Potential</span>
+              <span className="block text-white">
+                Financial Potential
+              </span>
             </h1>
 
             <div className="mt-7 h-1 w-24 bg-[#00C6FF]" />
 
-            <p className="mt-7 max-w-[680px] text-lg font-medium leading-8 text-white/85 sm:text-xl">
+            <p className="mt-7 max-w-[760px] text-base font-medium leading-7 text-white md:text-xl md:leading-8">
               Explore mortgage loan solutions by leveraging eligible property
-              and access suitable lending options through our trusted network.
+              and access suitable lending options through our trusted network
+              of banks and NBFCs.
             </p>
 
             <div className="mt-9 flex flex-wrap gap-4">
@@ -219,164 +221,152 @@ export default function MortgageLoanPage() {
                   setSubmitted(false);
                   setShowForm(true);
                 }}
-                className="rounded-xl bg-[#39B5E8] px-9 py-4 text-lg font-bold text-white shadow-lg transition hover:-translate-y-1 hover:bg-[#27A7DB]"
+                className="group inline-flex min-h-[64px] items-center justify-center rounded-xl bg-[#38B5E8] px-10 py-4 text-lg font-bold text-white shadow-lg transition hover:-translate-y-1 hover:bg-[#25A7DC] hover:shadow-xl"
               >
-                Apply Now →
+                Apply Now
+                <span className="ml-2 transition-transform group-hover:translate-x-1">
+                  →
+                </span>
               </button>
 
               <Link
                 href="/emi-calculator"
-                className="rounded-xl border-2 border-[#00C6FF] px-9 py-4 text-lg font-bold text-[#00C6FF] transition hover:bg-[#00C6FF] hover:text-[#071B72]"
+                className="inline-flex min-h-[64px] items-center justify-center rounded-xl border-2 border-[#00C6FF] px-10 py-4 text-lg font-bold text-[#00C6FF] transition hover:-translate-y-1 hover:bg-[#00C6FF] hover:text-[#061A70]"
               >
                 Calculate EMI
               </Link>
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-6 text-sm font-semibold text-white/65">
+            <div className="mt-8 flex flex-wrap gap-6 text-sm font-semibold text-white/75">
               <span>✓ Property Backed</span>
               <span>✓ Multiple Lenders</span>
               <span>✓ Assisted Process</span>
             </div>
           </div>
-
-          <div className="relative flex min-h-[500px] items-center justify-center">
-            <div className="mortgage-float relative w-full max-w-[600px]">
-              <div className="absolute left-1/2 top-1/2 h-[430px] w-[430px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#00C6FF]/15 blur-3xl" />
-
-              <div className="mortgage-orbit absolute left-1/2 top-1/2 h-[470px] w-[470px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#00C6FF]/15" />
-
-              <div className="relative mx-auto w-[78%] rounded-[36px] border border-white/20 bg-white/10 p-5 shadow-2xl backdrop-blur-xl">
-                <div className="overflow-hidden rounded-[28px] bg-white">
-                  <div className="relative h-[340px] bg-gradient-to-br from-[#EAF8FF] to-[#D7F1FA]">
-                    <div className="absolute bottom-0 h-[32%] w-full bg-[#BDE8C7]" />
-
-                    <div className="absolute bottom-[17%] left-1/2 -translate-x-1/2">
-                      <div className="mx-auto h-0 w-0 border-b-[95px] border-l-[145px] border-r-[145px] border-b-[#171C5C] border-l-transparent border-r-transparent" />
-
-                      <div className="relative mx-auto h-[145px] w-[230px] bg-white shadow-xl">
-                        <div className="absolute left-6 top-7 h-12 w-12 border-4 border-[#171C5C] bg-[#B9EAF8]" />
-                        <div className="absolute right-6 top-7 h-12 w-12 border-4 border-[#171C5C] bg-[#B9EAF8]" />
-                        <div className="absolute bottom-0 left-1/2 h-20 w-12 -translate-x-1/2 rounded-t-md bg-[#39B5E8]" />
-                      </div>
-                    </div>
-
-                    <div className="absolute left-[10%] top-[13%] rounded-2xl bg-white p-4 shadow-xl">
-                      <p className="text-xs font-bold text-[#39B5E8]">
-                        PROPERTY
-                      </p>
-                      <p className="mt-1 font-extrabold text-[#171C5C]">
-                        Value Unlock
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="px-6 py-5">
-                    <p className="text-xs font-bold tracking-widest text-[#39B5E8]">
-                      MORTGAGE LOAN
-                    </p>
-                    <p className="mt-1 text-lg font-extrabold">
-                      Unlock Your Property
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="absolute right-0 top-[18%] rounded-2xl border border-white/20 bg-white/10 px-5 py-4 text-white shadow-xl backdrop-blur-xl">
-                <p className="text-xs text-white/60">Property</p>
-                <p className="font-bold">Backed Finance</p>
-              </div>
-
-              <div className="absolute bottom-[15%] left-0 rounded-2xl border border-white/20 bg-white/10 px-5 py-4 text-white shadow-xl backdrop-blur-xl">
-                <p className="text-xs text-white/60">Multiple</p>
-                <p className="font-bold">Lender Options</p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
+      {/* =====================================================
+          BENEFITS
+      ===================================================== */}
       <section className="px-6 py-24 sm:px-10 lg:px-16">
         <div className="mx-auto max-w-[1300px]">
-          <p className="text-sm font-bold tracking-[.16em] text-[#39B5E8]">
+          <p className="text-sm font-bold tracking-[0.16em] text-[#39B5E8]">
             WHY CHOOSE US
           </p>
+
           <h2 className="mt-3 text-4xl font-extrabold sm:text-5xl">
             Mortgage Loan Benefits
           </h2>
 
           <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {benefits.map(([number, title, text]) => (
+            {benefits.map((item) => (
               <article
-                key={number}
-                className="rounded-3xl border border-[#171C5C]/10 p-7 transition hover:-translate-y-2 hover:border-[#39B5E8] hover:shadow-xl"
+                key={item.number}
+                className="group rounded-3xl border border-[#171C5C]/10 p-7 transition-all duration-300 hover:-translate-y-2 hover:border-[#39B5E8] hover:shadow-xl"
               >
-                <span className="font-bold text-[#39B5E8]">{number}</span>
-                <h3 className="mt-8 text-xl font-extrabold">{title}</h3>
-                <p className="mt-4 leading-7 text-gray-600">{text}</p>
+                <span className="text-sm font-bold text-[#39B5E8]">
+                  {item.number}
+                </span>
+
+                <h3 className="mt-8 text-xl font-extrabold">
+                  {item.title}
+                </h3>
+
+                <p className="mt-4 leading-7 text-gray-600">
+                  {item.text}
+                </p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
+      {/* =====================================================
+          FEATURES
+      ===================================================== */}
       <section className="bg-[#F5FAFD] px-6 py-24">
-        <div className="mx-auto grid max-w-[1300px] gap-12 lg:grid-cols-2">
+        <div className="mx-auto grid max-w-[1300px] gap-14 lg:grid-cols-2">
           <div>
-            <p className="text-sm font-bold tracking-[.16em] text-[#39B5E8]">
+            <p className="text-sm font-bold tracking-[0.16em] text-[#39B5E8]">
               FEATURES
             </p>
-            <h2 className="mt-3 text-4xl font-extrabold">
+
+            <h2 className="mt-3 text-4xl font-extrabold sm:text-5xl">
               Unlock the Value of Your Property
             </h2>
+
+            <p className="mt-6 max-w-xl leading-8 text-gray-600">
+              Explore mortgage lending solutions designed around your
+              property, financial requirements and repayment capacity.
+            </p>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            {features.map((item, i) => (
+            {features.map((item, index) => (
               <div
                 key={item}
-                className="rounded-2xl bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+                className="group rounded-2xl bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
               >
-                <span className="font-bold text-[#39B5E8]">
-                  0{i + 1}
+                <span className="text-sm font-bold text-[#39B5E8]">
+                  {String(index + 1).padStart(2, "0")}
                 </span>
-                <p className="mt-4 font-bold">{item}</p>
+
+                <p className="mt-4 font-bold">
+                  {item}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="px-6 py-24 sm:px-10">
+      {/* =====================================================
+          ELIGIBILITY + DOCUMENTS
+      ===================================================== */}
+      <section className="px-6 py-24 sm:px-10 lg:px-16">
         <div className="mx-auto grid max-w-[1300px] gap-8 lg:grid-cols-2">
-          <div className="rounded-3xl bg-[#071B72] p-9 text-white">
-            <p className="text-sm font-bold tracking-[.16em] text-[#39B5E8]">
+          <div className="rounded-3xl bg-[#071B72] p-8 text-white sm:p-10">
+            <p className="text-sm font-bold tracking-[0.16em] text-[#39B5E8]">
               ELIGIBILITY
             </p>
-            <h2 className="mt-3 text-3xl font-extrabold">Who Can Apply?</h2>
+
+            <h2 className="mt-3 text-3xl font-extrabold">
+              Who Can Apply?
+            </h2>
 
             <div className="mt-8 space-y-4">
               {eligibility.map((item) => (
                 <div key={item} className="flex gap-3">
                   <span className="text-[#39B5E8]">✓</span>
-                  <span className="text-white/80">{item}</span>
+
+                  <span className="text-white/80">
+                    {item}
+                  </span>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="rounded-3xl border border-[#171C5C]/10 p-9">
-            <p className="text-sm font-bold tracking-[.16em] text-[#39B5E8]">
+          <div className="rounded-3xl border border-[#171C5C]/10 p-8 sm:p-10">
+            <p className="text-sm font-bold tracking-[0.16em] text-[#39B5E8]">
               DOCUMENTS
             </p>
+
             <h2 className="mt-3 text-3xl font-extrabold">
               Documents You May Need
             </h2>
 
             <div className="mt-8 space-y-4">
-              {documents.map((item) => (
+              {documents.map((item, index) => (
                 <div key={item} className="flex gap-3">
-                  <span className="text-[#39B5E8]">✓</span>
-                  <span className="text-gray-600">{item}</span>
+                  <span className="font-bold text-[#39B5E8]">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+
+                  <span className="text-gray-600">
+                    {item}
+                  </span>
                 </div>
               ))}
             </div>
@@ -384,35 +374,52 @@ export default function MortgageLoanPage() {
         </div>
       </section>
 
+      {/* =====================================================
+          PROCESS
+      ===================================================== */}
       <section className="bg-[#071B72] px-6 py-24 text-white">
         <div className="mx-auto max-w-[1300px]">
-          <p className="text-sm font-bold tracking-[.16em] text-[#39B5E8]">
-            PROCESS
+          <p className="text-sm font-bold tracking-[0.16em] text-[#39B5E8]">
+            SIMPLE PROCESS
           </p>
-          <h2 className="mt-3 text-4xl font-extrabold">
+
+          <h2 className="mt-3 text-4xl font-extrabold sm:text-5xl">
             A Simple Mortgage Journey
           </h2>
 
-          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {steps.map(([number, title, text]) => (
               <div
                 key={number}
-                className="rounded-3xl border border-white/10 bg-white/5 p-7 transition hover:-translate-y-2 hover:bg-white/10"
+                className="rounded-3xl border border-white/10 bg-white/5 p-7 transition-all hover:-translate-y-2 hover:bg-white/10"
               >
                 <span className="text-4xl font-extrabold text-[#39B5E8]">
                   {number}
                 </span>
-                <h3 className="mt-7 text-xl font-extrabold">{title}</h3>
-                <p className="mt-4 leading-7 text-white/65">{text}</p>
+
+                <h3 className="mt-7 text-xl font-extrabold">
+                  {title}
+                </h3>
+
+                <p className="mt-4 leading-7 text-white/65">
+                  {text}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* =====================================================
+          FAQ
+      ===================================================== */}
       <section className="px-6 py-24">
         <div className="mx-auto max-w-[900px]">
-          <h2 className="text-center text-4xl font-extrabold">
+          <p className="text-center text-sm font-bold tracking-[0.16em] text-[#39B5E8]">
+            FAQ
+          </p>
+
+          <h2 className="mt-3 text-center text-4xl font-extrabold">
             Mortgage Loan FAQs
           </h2>
 
@@ -429,15 +436,16 @@ export default function MortgageLoanPage() {
                   className="flex w-full items-center justify-between p-6 text-left font-bold"
                 >
                   {question}
+
                   <span className="text-2xl text-[#39B5E8]">
                     {openFaq === index ? "−" : "+"}
                   </span>
                 </button>
 
                 {openFaq === index && (
-                  <p className="px-6 pb-6 leading-7 text-gray-600">
+                  <div className="px-6 pb-6 leading-7 text-gray-600">
                     {answer}
-                  </p>
+                  </div>
                 )}
               </div>
             ))}
@@ -445,11 +453,15 @@ export default function MortgageLoanPage() {
         </div>
       </section>
 
+      {/* =====================================================
+          FINAL CTA
+      ===================================================== */}
       <section className="px-6 pb-24">
-        <div className="mx-auto max-w-[1300px] rounded-[36px] bg-[#071B72] p-10 text-center text-white sm:p-16">
-          <p className="font-bold tracking-[.16em] text-[#39B5E8]">
+        <div className="mx-auto max-w-[1300px] overflow-hidden rounded-[36px] bg-[#071B72] p-10 text-center text-white sm:p-16">
+          <p className="font-bold tracking-[0.16em] text-[#39B5E8]">
             UNLOCK YOUR PROPERTY
           </p>
+
           <h2 className="mx-auto mt-4 max-w-3xl text-4xl font-extrabold sm:text-5xl">
             Explore Your Mortgage Loan Options
           </h2>
@@ -466,18 +478,27 @@ export default function MortgageLoanPage() {
         </div>
       </section>
 
+      {/* =====================================================
+          APPLICATION FORM
+      ===================================================== */}
       {showForm && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-5">
           <div className="max-h-[90vh] w-full max-w-xl overflow-y-auto rounded-3xl bg-white p-7 shadow-2xl sm:p-10">
-            <div className="flex justify-between">
+            <div className="flex items-center justify-between">
               <div>
-                <p className="font-bold text-[#39B5E8]">MORTGAGE LOAN</p>
-                <h2 className="mt-1 text-3xl font-extrabold">Apply Now</h2>
+                <p className="text-sm font-bold text-[#39B5E8]">
+                  MORTGAGE LOAN
+                </p>
+
+                <h2 className="mt-1 text-3xl font-extrabold">
+                  Apply Now
+                </h2>
               </div>
 
               <button
                 onClick={() => setShowForm(false)}
                 className="text-2xl text-gray-500"
+                aria-label="Close application form"
               >
                 ×
               </button>
@@ -488,12 +509,15 @@ export default function MortgageLoanPage() {
                 <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#E8F8FC] text-3xl text-[#39B5E8]">
                   ✓
                 </div>
+
                 <h3 className="mt-5 text-2xl font-extrabold">
                   Thank You!
                 </h3>
+
                 <p className="mt-3 text-gray-600">
                   Your enquiry has been submitted successfully.
                 </p>
+
                 <button
                   onClick={() => setShowForm(false)}
                   className="mt-7 rounded-xl bg-[#071B72] px-7 py-3 font-bold text-white"
@@ -502,12 +526,15 @@ export default function MortgageLoanPage() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+              <form
+                onSubmit={handleSubmit}
+                className="mt-8 space-y-5"
+              >
                 <input
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Full Name"
-                  className="w-full rounded-xl border px-5 py-4 outline-none focus:border-[#39B5E8]"
+                  className="w-full rounded-xl border border-gray-200 px-5 py-4 outline-none focus:border-[#39B5E8]"
                 />
 
                 <input
@@ -515,7 +542,7 @@ export default function MortgageLoanPage() {
                   onChange={(e) => setMobile(e.target.value)}
                   placeholder="Mobile Number"
                   inputMode="numeric"
-                  className="w-full rounded-xl border px-5 py-4 outline-none focus:border-[#39B5E8]"
+                  className="w-full rounded-xl border border-gray-200 px-5 py-4 outline-none focus:border-[#39B5E8]"
                 />
 
                 <input
@@ -523,7 +550,7 @@ export default function MortgageLoanPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email Address"
                   type="email"
-                  className="w-full rounded-xl border px-5 py-4 outline-none focus:border-[#39B5E8]"
+                  className="w-full rounded-xl border border-gray-200 px-5 py-4 outline-none focus:border-[#39B5E8]"
                 />
 
                 <textarea
@@ -531,12 +558,12 @@ export default function MortgageLoanPage() {
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Tell us about your requirement"
                   rows={4}
-                  className="w-full resize-none rounded-xl border px-5 py-4 outline-none focus:border-[#39B5E8]"
+                  className="w-full resize-none rounded-xl border border-gray-200 px-5 py-4 outline-none focus:border-[#39B5E8]"
                 />
 
                 <button
                   disabled={submitting}
-                  className="w-full rounded-xl bg-[#071B72] px-6 py-4 font-bold text-white disabled:opacity-60"
+                  className="w-full rounded-xl bg-[#071B72] px-6 py-4 font-bold text-white transition hover:bg-[#10278A] disabled:opacity-60"
                 >
                   {submitting ? "Submitting..." : "Submit Enquiry"}
                 </button>

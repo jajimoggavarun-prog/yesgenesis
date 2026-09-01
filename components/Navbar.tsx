@@ -17,9 +17,9 @@ const loans = [
     href: "/loans/business-loan",
   },
   {
-  label: "Home Loan",
-  href: "/loans/home-loan",
-},
+    label: "Home Loan",
+    href: "/loans/home-loan",
+  },
   {
     label: "Mortgage Loan",
     href: "/loans/mortgage-loan",
@@ -49,8 +49,9 @@ export default function Navbar() {
       {/* =====================================================
           TOP CONTACT BAR
       ====================================================== */}
-      <div className="hidden md:flex bg-[#18205B] text-white items-center justify-between px-6 md:px-10 py-3">
+      <div className="hidden items-center justify-between bg-[#18205B] px-6 py-3 text-white md:flex md:px-10">
 
+        {/* Contact */}
         <div className="text-sm font-medium">
           Contact Us:{" "}
           <a
@@ -61,44 +62,112 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Social Links */}
-        <div className="flex items-center gap-5 text-sm">
+        {/* =================================================
+            SOCIAL MEDIA ICONS
+        ================================================== */}
+        <div className="flex items-center gap-5">
 
+          {/* Instagram */}
           <a
-            href="#"
+            href="https://www.instagram.com/"
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label="Instagram"
-            className="transition-colors duration-200 hover:text-[#00C8F8]"
+            className="text-white transition-colors duration-200 hover:text-[#00C8F8]"
           >
-            Instagram
+            <svg
+              width="21"
+              height="21"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <rect
+                x="3"
+                y="3"
+                width="18"
+                height="18"
+                rx="5"
+                stroke="currentColor"
+                strokeWidth="2"
+              />
+
+              <circle
+                cx="12"
+                cy="12"
+                r="4"
+                stroke="currentColor"
+                strokeWidth="2"
+              />
+
+              <circle
+                cx="17.5"
+                cy="6.5"
+                r="1"
+                fill="currentColor"
+              />
+            </svg>
           </a>
 
+          {/* Facebook */}
           <a
-            href="#"
+            href="https://www.facebook.com/"
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label="Facebook"
-            className="transition-colors duration-200 hover:text-[#00C8F8]"
+            className="text-white transition-colors duration-200 hover:text-[#00C8F8]"
           >
-            Facebook
+            <svg
+              width="21"
+              height="21"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M14 8h3V4h-3c-3.31 0-5 1.69-5 5v3H6v4h3v8h4v-8h3.5l.5-4H13V9c0-.67.33-1 1-1z" />
+            </svg>
           </a>
 
+          {/* X */}
           <a
-            href="#"
+            href="https://x.com/"
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label="X"
-            className="transition-colors duration-200 hover:text-[#00C8F8]"
+            className="flex h-[21px] w-[21px] items-center justify-center text-white transition-colors duration-200 hover:text-[#00C8F8]"
           >
-            X
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M18.244 2H21.5l-7.11 8.13L22.75 22h-6.59l-5.16-6.74L5.1 22H1.84l7.61-8.7L1.25 2h6.76l4.66 6.16L18.244 2zm-1.16 17.88h1.8L7.02 4h-1.93l11.994 15.88z" />
+            </svg>
           </a>
 
+          {/* YouTube */}
           <a
-            href="#"
+            href="https://www.youtube.com/"
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label="YouTube"
-            className="transition-colors duration-200 hover:text-[#00C8F8]"
+            className="text-white transition-colors duration-200 hover:text-[#00C8F8]"
           >
-            YouTube
+            <svg
+              width="23"
+              height="23"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z" />
+            </svg>
           </a>
 
         </div>
       </div>
-
 
       {/* =====================================================
           MAIN NAVIGATION
@@ -107,15 +176,14 @@ export default function Navbar() {
         className="bg-white"
         aria-label="Primary navigation"
       >
-
-        <div className="max-w-container mx-auto flex items-center justify-between px-6 md:px-10 py-3">
+        <div className="max-w-container mx-auto flex items-center justify-between px-6 py-3 md:px-10">
 
           {/* =================================================
               LOGO
           ================================================== */}
           <Link
             href="/"
-            className="shrink-0 flex items-center"
+            className="flex shrink-0 items-center"
             aria-label="YES Genesis Fintech home"
             onClick={closeMobileMenu}
           >
@@ -129,11 +197,10 @@ export default function Navbar() {
             />
           </Link>
 
-
           {/* =================================================
               DESKTOP NAVIGATION
           ================================================== */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden items-center gap-8 lg:flex">
 
             {/* HOME */}
             <Link
@@ -149,7 +216,6 @@ export default function Navbar() {
             >
               Home
             </Link>
-
 
             {/* =================================================
                 LOANS DROPDOWN
@@ -196,8 +262,7 @@ export default function Navbar() {
                 </svg>
               </button>
 
-
-              {/* LOANS DROPDOWN */}
+              {/* DROPDOWN */}
               {loansOpen && (
                 <div
                   className="
@@ -221,7 +286,6 @@ export default function Navbar() {
                       shadow-[0_10px_35px_rgba(0,0,0,0.15)]
                     "
                   >
-
                     {loans.map((loan) => (
                       <li key={loan.href}>
                         <Link
@@ -244,55 +308,45 @@ export default function Navbar() {
                         </Link>
                       </li>
                     ))}
-
                   </ul>
                 </div>
               )}
 
             </div>
 
-
-            {/* =================================================
-                CIBIL SCORE
-            ================================================== */}
+            {/* CIBIL SCORE */}
             <Link
               href="/cibil-score"
               className="
+                whitespace-nowrap
                 text-[16px]
                 font-semibold
                 text-[#18205B]
                 transition-colors
                 duration-200
                 hover:text-[#2563FF]
-                whitespace-nowrap
               "
             >
               CIBIL Score
             </Link>
 
-
-            {/* =================================================
-                EMI CALCULATOR
-            ================================================== */}
+            {/* EMI CALCULATOR */}
             <Link
               href="/emi-calculator"
               className="
+                whitespace-nowrap
                 text-[16px]
                 font-semibold
                 text-[#18205B]
                 transition-colors
                 duration-200
                 hover:text-[#2563FF]
-                whitespace-nowrap
               "
             >
               EMI Calculator
             </Link>
 
-
-            {/* =================================================
-                DSA BUTTON
-            ================================================== */}
+            {/* DSA BUTTON */}
             <Button
               href="/dsa-partner"
               variant="primary"
@@ -310,7 +364,6 @@ export default function Navbar() {
             </Button>
 
           </div>
-
 
           {/* =================================================
               MOBILE HAMBURGER
@@ -333,14 +386,13 @@ export default function Navbar() {
               setMobileOpen((open) => !open)
             }
           >
-
             {mobileOpen ? (
-
               <svg
                 width="28"
                 height="28"
                 viewBox="0 0 24 24"
                 fill="none"
+                aria-hidden="true"
               >
                 <path
                   d="M6 6L18 18M6 18L18 6"
@@ -349,14 +401,13 @@ export default function Navbar() {
                   strokeLinecap="round"
                 />
               </svg>
-
             ) : (
-
               <svg
                 width="28"
                 height="28"
                 viewBox="0 0 24 24"
                 fill="none"
+                aria-hidden="true"
               >
                 <path
                   d="M4 7H20M4 12H20M4 17H20"
@@ -365,19 +416,15 @@ export default function Navbar() {
                   strokeLinecap="round"
                 />
               </svg>
-
             )}
-
           </button>
 
         </div>
-
 
         {/* =====================================================
             MOBILE MENU
         ====================================================== */}
         {mobileOpen && (
-
           <div
             className="
               border-t
@@ -416,7 +463,6 @@ export default function Navbar() {
                 </Link>
               </li>
 
-
               {/* MOBILE LOANS */}
               <li>
 
@@ -437,7 +483,6 @@ export default function Navbar() {
                     setLoansOpen((open) => !open)
                   }
                 >
-
                   Loans
 
                   <svg
@@ -450,6 +495,7 @@ export default function Navbar() {
                     height="8"
                     viewBox="0 0 12 8"
                     fill="none"
+                    aria-hidden="true"
                   >
                     <path
                       d="M1 1L6 6L11 1"
@@ -458,12 +504,9 @@ export default function Navbar() {
                       strokeLinecap="round"
                     />
                   </svg>
-
                 </button>
 
-
                 {loansOpen && (
-
                   <ul
                     className="
                       ml-4
@@ -472,11 +515,8 @@ export default function Navbar() {
                       pl-4
                     "
                   >
-
                     {loans.map((loan) => (
-
                       <li key={loan.href}>
-
                         <Link
                           href={loan.href}
                           className="
@@ -490,23 +530,15 @@ export default function Navbar() {
                         >
                           {loan.label}
                         </Link>
-
                       </li>
-
                     ))}
-
                   </ul>
-
                 )}
 
               </li>
 
-
-              {/* =================================================
-                  MOBILE CIBIL SCORE
-              ================================================== */}
+              {/* CIBIL SCORE */}
               <li>
-
                 <Link
                   href="/cibil-score"
                   className="
@@ -521,13 +553,10 @@ export default function Navbar() {
                 >
                   CIBIL Score
                 </Link>
-
               </li>
 
-
-              {/* EMI */}
+              {/* EMI CALCULATOR */}
               <li>
-
                 <Link
                   href="/emi-calculator"
                   className="
@@ -541,11 +570,9 @@ export default function Navbar() {
                 >
                   EMI Calculator
                 </Link>
-
               </li>
 
             </ul>
-
 
             {/* MOBILE DSA BUTTON */}
             <Button
@@ -564,7 +591,6 @@ export default function Navbar() {
               Become DSA Partner
             </Button>
 
-
             {/* MOBILE PHONE */}
             <a
               href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
@@ -581,11 +607,9 @@ export default function Navbar() {
             </a>
 
           </div>
-
         )}
 
       </nav>
-
     </header>
   );
 }

@@ -249,200 +249,84 @@ export default function BusinessLoanPage() {
       `}</style>
 
       <Navbar />
+{/* =========================================================
+    BUSINESS LOAN HERO
+    Same layout as Personal Loan
+    Background: /public/assets/business-loan-visual.png
+========================================================= */}
 
-      {/* =========================================================
-          HERO
-      ========================================================= */}
+<section
+  className="relative min-h-[720px] overflow-hidden bg-[#061A70] bg-cover bg-center bg-no-repeat"
+  style={{
+    backgroundImage: 'url("/assets/business-loan-visual.png")',
+  }}
+>
+  {/* Subtle overlay keeps the left-side typography crisp */}
+  <div className="absolute inset-0 bg-gradient-to-r from-[#061A70]/10 via-transparent to-transparent" />
 
-      <section className="relative overflow-hidden bg-[#071B72]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_35%,rgba(0,198,255,.20),transparent_34%)]" />
+  <div className="relative z-10 mx-auto flex min-h-[720px] max-w-container items-center px-6 py-16 md:px-8">
+    <div className="w-full max-w-[700px]">
 
-        <div className="absolute -right-[280px] -top-[280px] h-[720px] w-[720px] rounded-full border border-[#00C6FF]/15" />
+      <p className="mb-5 text-sm font-bold uppercase tracking-[0.16em] text-[#2EB9F0] md:text-base">
+        BUSINESS FINANCE
+      </p>
 
-        <div className="absolute bottom-[-250px] left-[-180px] h-[520px] w-[520px] rounded-full bg-[#073AAB]/40 blur-3xl" />
+      <h1 className="text-[48px] font-extrabold leading-[0.98] tracking-[-0.025em] text-white sm:text-[58px] md:text-[68px] lg:text-[76px]">
+        Grow Your
+        <span className="block text-[#36B8F0]">
+          Business
+        </span>
+        <span className="block text-white">
+          With The Right Finance
+        </span>
+      </h1>
 
-        <div className="mx-auto grid min-h-[720px] max-w-[1500px] items-center gap-12 px-6 py-16 lg:grid-cols-[1.05fr_.95fr] lg:px-10">
-          {/* LEFT */}
+      <p className="mt-8 max-w-[760px] text-base font-medium leading-7 text-white md:text-xl md:leading-8">
+        Access suitable business loan options through our trusted network
+        of banks and NBFCs with guidance throughout the application process.
+      </p>
 
-          <div className="business-reveal relative z-10 max-w-[720px]">
-            <p className="mb-5 text-sm font-bold uppercase tracking-[0.18em] text-[#00C6FF]">
-              Business Finance
-            </p>
+      <div className="mt-8 flex flex-wrap gap-5 text-sm font-semibold text-white/80">
+        <span>✓ Paperless Process</span>
+        <span>✓ Flexible Tenure</span>
+        <span>✓ Competitive Rates</span>
+      </div>
 
-            <h1 className="text-5xl font-extrabold leading-[0.98] tracking-[-0.04em] text-white sm:text-6xl lg:text-[70px]">
-              Grow Your
-              <span className="block text-[#39B5E8]">Business</span>
-              <span className="block">With The Right Finance</span>
-            </h1>
+      <div className="mt-9 flex flex-wrap gap-4">
 
-            <div className="mt-7 h-1 w-24 bg-[#00C6FF]" />
+        {/* Apply button — keeps your existing enquiry modal */}
+        <button
+          onClick={() => {
+            setSubmitted(false);
+            setShowForm(true);
+          }}
+          className="group inline-flex min-h-[64px] items-center justify-center rounded-xl bg-[#38B5E8] px-10 py-4 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-[#25A7DC]"
+        >
+          Apply for Business Loan
 
-            <p className="mt-7 max-w-[680px] text-lg font-medium leading-8 text-white/85 sm:text-xl">
-              Access suitable business loan options through our trusted
-              network of banks and NBFCs with guidance throughout the
-              application process.
-            </p>
+          <span className="ml-2 inline-block transition-transform group-hover:translate-x-1">
+            →
+          </span>
+        </button>
 
-            <div className="mt-8 flex flex-wrap gap-5 text-sm font-semibold text-white/65">
-              <span>✓ Paperless Process</span>
-              <span>✓ Flexible Tenure</span>
-              <span>✓ Competitive Rates</span>
-            </div>
+        {/* EMI Calculator */}
+        <Link
+          href="/emi-calculator"
+          className="inline-flex min-h-[64px] items-center justify-center rounded-xl border-2 border-[#00C6FF] px-10 py-4 text-lg font-bold text-[#00C6FF] transition-all duration-300 hover:-translate-y-1 hover:bg-[#00C6FF] hover:text-[#061A70]"
+        >
+          Calculate EMI
+        </Link>
 
-            <div className="mt-9 flex flex-wrap gap-4">
-              <button
-                onClick={() => {
-                  setSubmitted(false);
-                  setShowForm(true);
-                }}
-                className="group rounded-xl bg-[#39B5E8] px-9 py-4 text-lg font-bold text-white shadow-[0_15px_40px_rgba(0,198,255,.18)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#27A7DB] hover:shadow-[0_20px_50px_rgba(0,198,255,.3)]"
-              >
-                Apply for Business Loan
-                <span className="ml-2 inline-block transition-transform group-hover:translate-x-1">
-                  →
-                </span>
-              </button>
+      </div>
 
-              <Link
-                href="/emi-calculator"
-                className="rounded-xl border-2 border-[#00C6FF] px-9 py-4 text-lg font-bold text-[#00C6FF] transition-all duration-300 hover:-translate-y-1 hover:bg-[#00C6FF] hover:text-[#071B72]"
-              >
-                Calculate EMI
-              </Link>
-            </div>
+      <p className="mt-5 max-w-[620px] text-xs leading-5 text-white/60">
+        Loan approval and terms are subject to lender eligibility,
+        documentation and verification.
+      </p>
 
-            <p className="mt-5 max-w-[620px] text-xs leading-5 text-white/50">
-              Loan approval and terms are subject to lender eligibility,
-              documentation and verification.
-            </p>
-          </div>
-
-          {/* RIGHT VISUAL */}
-
-          <div className="relative flex min-h-[520px] items-center justify-center">
-            <div className="business-float relative w-full max-w-[650px]">
-              {/* glow */}
-
-              <div className="business-pulse absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#00C6FF]/15 blur-3xl" />
-
-              {/* orbit */}
-
-              <div className="business-orbit absolute left-1/2 top-1/2 h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#00C6FF]/15" />
-
-              {/* main dashboard */}
-
-              <div className="relative mx-auto w-[84%] rounded-[36px] border border-white/20 bg-white/10 p-5 shadow-2xl backdrop-blur-xl sm:p-7">
-                <div className="overflow-hidden rounded-[28px] bg-white shadow-2xl">
-                  {/* dashboard header */}
-
-                  <div className="flex items-center justify-between border-b border-gray-100 px-6 py-5">
-                    <div>
-                      <p className="text-[10px] font-bold tracking-[0.2em] text-[#39B5E8]">
-                        BUSINESS FINANCE
-                      </p>
-
-                      <p className="mt-1 text-lg font-extrabold text-[#171C5C]">
-                        Business Dashboard
-                      </p>
-                    </div>
-
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E8F8FC] text-[#39B5E8]">
-                      ₹
-                    </div>
-                  </div>
-
-                  {/* graph */}
-
-                  <div className="relative h-[280px] overflow-hidden bg-[#F6FBFE] px-6 pt-8">
-                    <div className="flex items-end justify-between">
-                      <div>
-                        <p className="text-xs font-semibold text-gray-400">
-                          Business Growth
-                        </p>
-
-                        <p className="mt-1 text-3xl font-extrabold text-[#171C5C]">
-                          +28.6%
-                        </p>
-                      </div>
-
-                      <div className="rounded-full bg-[#DDF7FD] px-3 py-1 text-xs font-bold text-[#159CCB]">
-                        Growth
-                      </div>
-                    </div>
-
-                    {/* chart */}
-
-                    <div className="absolute bottom-8 left-6 right-6 flex h-[130px] items-end gap-3">
-                      {[38, 55, 48, 70, 64, 92, 110, 125].map(
-                        (height, index) => (
-                          <div
-                            key={index}
-                            className="flex-1 rounded-t-lg bg-[#39B5E8] opacity-80 transition-all duration-500 hover:opacity-100"
-                            style={{
-                              height: `${height}px`,
-                            }}
-                          />
-                        ),
-                      )}
-                    </div>
-
-                    {/* line */}
-
-                    <div className="absolute bottom-[92px] left-[50px] right-[45px] h-[3px] rotate-[-7deg] rounded-full bg-[#171C5C]" />
-
-                    <div className="absolute bottom-[104px] right-[25%] h-4 w-4 rounded-full border-4 border-white bg-[#171C5C] shadow-md" />
-                  </div>
-
-                  {/* cards */}
-
-                  <div className="grid grid-cols-2 gap-3 p-5">
-                    <div className="rounded-2xl bg-[#071B72] p-4 text-white">
-                      <p className="text-[10px] uppercase tracking-widest text-white/50">
-                        Funding
-                      </p>
-
-                      <p className="mt-2 text-xl font-extrabold">
-                        Business
-                      </p>
-
-                      <p className="mt-1 text-xs text-[#39B5E8]">
-                        Finance Ready
-                      </p>
-                    </div>
-
-                    <div className="rounded-2xl bg-[#EAF8FC] p-4">
-                      <p className="text-[10px] uppercase tracking-widest text-gray-400">
-                        Process
-                      </p>
-
-                      <p className="mt-2 text-xl font-extrabold text-[#171C5C]">
-                        Simple
-                      </p>
-
-                      <p className="mt-1 text-xs font-semibold text-[#39B5E8]">
-                        Guided Application
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* floating cards */}
-
-              <div className="absolute left-0 top-[16%] rounded-2xl border border-white/20 bg-white/10 px-5 py-4 text-white shadow-xl backdrop-blur-xl">
-                <p className="text-xs text-white/50">Finance</p>
-                <p className="font-bold">For Growth</p>
-              </div>
-
-              <div className="absolute bottom-[13%] right-0 rounded-2xl border border-white/20 bg-white/10 px-5 py-4 text-white shadow-xl backdrop-blur-xl">
-                <p className="text-xs text-white/50">Multiple</p>
-                <p className="font-bold">Lender Options</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
+    </div>
+  </div>
+</section>
       {/* =========================================================
           BENEFITS
       ========================================================= */}

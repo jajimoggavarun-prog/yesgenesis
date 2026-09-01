@@ -141,46 +141,19 @@ export default function EducationLoanPage() {
             opacity: 0;
             transform: translateY(30px);
           }
+
           to {
             opacity: 1;
             transform: translateY(0);
           }
         }
 
-        @keyframes educationFloat {
-          0%, 100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-14px);
-          }
-        }
-
-        @keyframes educationOrbit {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-
         .education-reveal {
-          animation: educationReveal .8s ease-out both;
-        }
-
-        .education-float {
-          animation: educationFloat 5s ease-in-out infinite;
-        }
-
-        .education-orbit {
-          animation: educationOrbit 25s linear infinite;
+          animation: educationReveal 0.8s ease-out both;
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .education-reveal,
-          .education-float,
-          .education-orbit {
+          .education-reveal {
             animation: none !important;
           }
         }
@@ -188,26 +161,43 @@ export default function EducationLoanPage() {
 
       <Navbar />
 
-      <section className="relative overflow-hidden bg-[#071B72]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_32%,rgba(0,198,255,.2),transparent_32%)]" />
+      {/* =====================================================
+          EDUCATION LOAN HERO
 
-        <div className="absolute -right-[260px] -top-[300px] h-[760px] w-[760px] rounded-full border border-[#00C6FF]/20" />
+          Background:
+          /public/assets/Education-loan-visual.png
 
-        <div className="mx-auto grid min-h-[700px] max-w-[1500px] items-center gap-12 px-6 py-16 lg:grid-cols-[1.05fr_.95fr] lg:px-10">
-          <div className="education-reveal relative z-10 max-w-[720px]">
-            <p className="mb-5 text-sm font-bold tracking-[.16em] text-[#00C6FF]">
-              YES GENESIS FINTECH
+          Same full-background treatment as Personal Loan hero.
+      ===================================================== */}
+      <section
+        className="relative min-h-[720px] overflow-hidden bg-[#061A70] bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage:
+            'url("/assets/Education-loan-visual.png")',
+        }}
+      >
+        {/* Subtle overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#061A70]/20 via-[#061A70]/5 to-transparent" />
+
+        <div className="relative z-10 mx-auto flex min-h-[720px] max-w-container items-center px-6 py-16 md:px-8">
+          <div className="education-reveal w-full max-w-[720px]">
+            <p className="mb-5 text-sm font-bold uppercase tracking-[0.16em] text-[#2EB9F0] md:text-base">
+              EDUCATION FINANCE
             </p>
 
-            <h1 className="text-5xl font-extrabold leading-[.98] tracking-[-.04em] text-white sm:text-6xl lg:text-[68px]">
+            <h1 className="text-[48px] font-extrabold leading-[0.98] tracking-[-0.025em] text-white sm:text-[58px] md:text-[68px] lg:text-[76px]">
               Invest In Your
-              <span className="block text-[#39B5E8]">Future</span>
-              <span className="block">With Education Finance</span>
+              <span className="block text-[#36B8F0]">
+                Future
+              </span>
+              <span className="block text-white">
+                With Education Finance
+              </span>
             </h1>
 
             <div className="mt-7 h-1 w-24 bg-[#00C6FF]" />
 
-            <p className="mt-7 max-w-[700px] text-lg font-medium leading-8 text-white/85 sm:text-xl">
+            <p className="mt-7 max-w-[760px] text-base font-medium leading-7 text-white md:text-xl md:leading-8">
               Explore education loan options through our trusted network of
               lenders and get assistance throughout your application journey.
             </p>
@@ -218,87 +208,31 @@ export default function EducationLoanPage() {
                   setSubmitted(false);
                   setShowForm(true);
                 }}
-                className="rounded-xl bg-[#39B5E8] px-9 py-4 text-lg font-bold text-white shadow-lg transition hover:-translate-y-1 hover:bg-[#27A7DB]"
+                className="inline-flex min-h-[64px] items-center justify-center rounded-xl bg-[#38B5E8] px-10 py-4 text-lg font-bold text-white shadow-lg transition hover:-translate-y-1 hover:bg-[#25A7DC]"
               >
                 Apply Now →
               </button>
 
               <Link
                 href="/emi-calculator"
-                className="rounded-xl border-2 border-[#00C6FF] px-9 py-4 text-lg font-bold text-[#00C6FF] transition hover:bg-[#00C6FF] hover:text-[#071B72]"
+                className="inline-flex min-h-[64px] items-center justify-center rounded-xl border-2 border-[#00C6FF] px-10 py-4 text-lg font-bold text-[#00C6FF] transition hover:bg-[#00C6FF] hover:text-[#061A70]"
               >
                 Calculate EMI
               </Link>
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-6 text-sm font-semibold text-white/65">
+            <div className="mt-8 flex flex-wrap gap-6 text-sm font-semibold text-white/75">
               <span>✓ Guided Process</span>
               <span>✓ Multiple Lenders</span>
               <span>✓ Flexible Options</span>
             </div>
           </div>
-
-          {/* EDUCATION VISUAL */}
-          <div className="relative flex min-h-[500px] items-center justify-center">
-            <div className="education-float relative w-full max-w-[600px]">
-              <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#00C6FF]/15 blur-3xl" />
-
-              <div className="education-orbit absolute left-1/2 top-1/2 h-[470px] w-[470px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#00C6FF]/15" />
-
-              <div className="relative mx-auto w-[78%] rounded-[36px] border border-white/20 bg-white/10 p-5 shadow-2xl backdrop-blur-xl">
-                <div className="overflow-hidden rounded-[28px] bg-white">
-                  <div className="relative h-[340px] bg-gradient-to-br from-[#EAF8FF] to-[#D7F1FA]">
-                    {/* graduation cap */}
-                    <div className="absolute left-1/2 top-[20%] -translate-x-1/2">
-                      <div className="h-0 w-0 border-b-[55px] border-l-[100px] border-r-[100px] border-b-[#171C5C] border-l-transparent border-r-transparent" />
-
-                      <div className="mx-auto h-8 w-20 bg-[#171C5C]" />
-
-                      <div className="absolute right-[-15px] top-[-5px] h-20 w-1 rotate-[25deg] bg-[#39B5E8]" />
-                    </div>
-
-                    {/* books */}
-                    <div className="absolute bottom-[17%] left-1/2 -translate-x-1/2">
-                      <div className="h-8 w-52 rounded-lg bg-[#39B5E8]" />
-                      <div className="-mt-1 ml-5 h-8 w-44 rounded-lg bg-[#171C5C]" />
-                      <div className="-mt-1 ml-10 h-8 w-36 rounded-lg bg-[#73CDED]" />
-                    </div>
-
-                    {/* laptop */}
-                    <div className="absolute bottom-[32%] left-[13%] h-20 w-28 rounded-xl border-4 border-[#171C5C] bg-white shadow-lg">
-                      <div className="absolute left-1/2 top-1/2 h-9 w-16 -translate-x-1/2 -translate-y-1/2 rounded bg-[#DDF5FF]" />
-                    </div>
-
-                    <div className="absolute bottom-[32%] right-[12%] flex h-14 w-14 items-center justify-center rounded-full bg-[#39B5E8] text-2xl font-bold text-white">
-                      A+
-                    </div>
-                  </div>
-
-                  <div className="px-6 py-5">
-                    <p className="text-xs font-bold tracking-widest text-[#39B5E8]">
-                      EDUCATION LOAN
-                    </p>
-                    <p className="mt-1 text-lg font-extrabold">
-                      Invest In Your Future
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="absolute left-0 top-[15%] rounded-2xl border border-white/20 bg-white/10 px-5 py-4 text-white backdrop-blur-xl">
-                <p className="text-xs text-white/60">Future</p>
-                <p className="font-bold">Starts Here</p>
-              </div>
-
-              <div className="absolute bottom-[15%] right-0 rounded-2xl border border-white/20 bg-white/10 px-5 py-4 text-white backdrop-blur-xl">
-                <p className="text-xs text-white/60">Flexible</p>
-                <p className="font-bold">Finance Options</p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
+      {/* =====================================================
+          BENEFITS
+      ===================================================== */}
       <section className="px-6 py-24 sm:px-10 lg:px-16">
         <div className="mx-auto max-w-[1300px]">
           <p className="text-sm font-bold tracking-[.16em] text-[#39B5E8]">
@@ -315,15 +249,26 @@ export default function EducationLoanPage() {
                 key={number}
                 className="rounded-3xl border border-[#171C5C]/10 p-7 transition hover:-translate-y-2 hover:border-[#39B5E8] hover:shadow-xl"
               >
-                <span className="font-bold text-[#39B5E8]">{number}</span>
-                <h3 className="mt-8 text-xl font-extrabold">{title}</h3>
-                <p className="mt-4 leading-7 text-gray-600">{text}</p>
+                <span className="font-bold text-[#39B5E8]">
+                  {number}
+                </span>
+
+                <h3 className="mt-8 text-xl font-extrabold">
+                  {title}
+                </h3>
+
+                <p className="mt-4 leading-7 text-gray-600">
+                  {text}
+                </p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
+      {/* =====================================================
+          SOLUTIONS
+      ===================================================== */}
       <section className="bg-[#F5FAFD] px-6 py-24">
         <div className="mx-auto grid max-w-[1300px] gap-12 lg:grid-cols-2">
           <div>
@@ -350,13 +295,19 @@ export default function EducationLoanPage() {
                 <span className="font-bold text-[#39B5E8]">
                   0{i + 1}
                 </span>
-                <p className="mt-4 font-bold">{item}</p>
+
+                <p className="mt-4 font-bold">
+                  {item}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* =====================================================
+          ELIGIBILITY + DOCUMENTS
+      ===================================================== */}
       <section className="px-6 py-24">
         <div className="mx-auto grid max-w-[1300px] gap-8 lg:grid-cols-2">
           <div className="rounded-3xl bg-[#071B72] p-9 text-white">
@@ -371,8 +322,13 @@ export default function EducationLoanPage() {
             <div className="mt-8 space-y-4">
               {eligibility.map((item) => (
                 <div key={item} className="flex gap-3">
-                  <span className="text-[#39B5E8]">✓</span>
-                  <span className="text-white/80">{item}</span>
+                  <span className="text-[#39B5E8]">
+                    ✓
+                  </span>
+
+                  <span className="text-white/80">
+                    {item}
+                  </span>
                 </div>
               ))}
             </div>
@@ -390,8 +346,13 @@ export default function EducationLoanPage() {
             <div className="mt-8 space-y-4">
               {documents.map((item) => (
                 <div key={item} className="flex gap-3">
-                  <span className="text-[#39B5E8]">✓</span>
-                  <span className="text-gray-600">{item}</span>
+                  <span className="text-[#39B5E8]">
+                    ✓
+                  </span>
+
+                  <span className="text-gray-600">
+                    {item}
+                  </span>
                 </div>
               ))}
             </div>
@@ -399,6 +360,9 @@ export default function EducationLoanPage() {
         </div>
       </section>
 
+      {/* =====================================================
+          PROCESS
+      ===================================================== */}
       <section className="bg-[#071B72] px-6 py-24 text-white">
         <div className="mx-auto max-w-[1300px]">
           <p className="text-sm font-bold tracking-[.16em] text-[#39B5E8]">
@@ -419,15 +383,22 @@ export default function EducationLoanPage() {
                   {number}
                 </span>
 
-                <h3 className="mt-7 text-xl font-extrabold">{title}</h3>
+                <h3 className="mt-7 text-xl font-extrabold">
+                  {title}
+                </h3>
 
-                <p className="mt-4 leading-7 text-white/65">{text}</p>
+                <p className="mt-4 leading-7 text-white/65">
+                  {text}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* =====================================================
+          FAQ
+      ===================================================== */}
       <section className="px-6 py-24">
         <div className="mx-auto max-w-[900px]">
           <h2 className="text-center text-4xl font-extrabold">
@@ -442,7 +413,9 @@ export default function EducationLoanPage() {
               >
                 <button
                   onClick={() =>
-                    setOpenFaq(openFaq === index ? null : index)
+                    setOpenFaq(
+                      openFaq === index ? null : index
+                    )
                   }
                   className="flex w-full items-center justify-between p-6 text-left font-bold"
                 >
@@ -464,6 +437,9 @@ export default function EducationLoanPage() {
         </div>
       </section>
 
+      {/* =====================================================
+          CTA
+      ===================================================== */}
       <section className="px-6 pb-24">
         <div className="mx-auto max-w-[1300px] rounded-[36px] bg-[#071B72] p-10 text-center text-white sm:p-16">
           <p className="font-bold tracking-[.16em] text-[#39B5E8]">
@@ -486,6 +462,9 @@ export default function EducationLoanPage() {
         </div>
       </section>
 
+      {/* =====================================================
+          APPLICATION MODAL
+      ===================================================== */}
       {showForm && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-5">
           <div className="max-h-[90vh] w-full max-w-xl overflow-y-auto rounded-3xl bg-white p-7 shadow-2xl sm:p-10">
@@ -530,7 +509,10 @@ export default function EducationLoanPage() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+              <form
+                onSubmit={handleSubmit}
+                className="mt-8 space-y-5"
+              >
                 <input
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -566,7 +548,9 @@ export default function EducationLoanPage() {
                   disabled={submitting}
                   className="w-full rounded-xl bg-[#071B72] px-6 py-4 font-bold text-white disabled:opacity-60"
                 >
-                  {submitting ? "Submitting..." : "Submit Enquiry"}
+                  {submitting
+                    ? "Submitting..."
+                    : "Submit Enquiry"}
                 </button>
               </form>
             )}

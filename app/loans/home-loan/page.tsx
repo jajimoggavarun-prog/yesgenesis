@@ -47,6 +47,7 @@ const eligibility = [
   "Valid identity and address proof",
   "Minimum 1 year job stability for salaried applicants",
 ];
+
 const documents = [
   "PAN Card",
   "Aadhaar Card / Address Proof",
@@ -156,46 +157,19 @@ export default function HomeLoanPage() {
             opacity: 0;
             transform: translateY(30px);
           }
+
           to {
             opacity: 1;
             transform: translateY(0);
           }
         }
 
-        @keyframes homeFloat {
-          0%, 100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-14px);
-          }
-        }
-
-        @keyframes homeRotate {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-
         .home-reveal {
-          animation: homeReveal .8s ease-out both;
-        }
-
-        .home-float {
-          animation: homeFloat 5s ease-in-out infinite;
-        }
-
-        .home-orbit {
-          animation: homeRotate 25s linear infinite;
+          animation: homeReveal 0.8s ease-out both;
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .home-reveal,
-          .home-float,
-          .home-orbit {
+          .home-reveal {
             animation: none !important;
           }
         }
@@ -203,27 +177,39 @@ export default function HomeLoanPage() {
 
       <Navbar />
 
-      {/* HERO */}
-      <section className="relative overflow-hidden bg-[#071B72]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_35%,rgba(0,198,255,.2),transparent_32%)]" />
+      {/* =====================================================
+          HOME LOAN HERO
+          Background:
+          /public/assets/home-loan-visual.png
+      ===================================================== */}
+      <section
+        className="relative min-h-[720px] overflow-hidden bg-[#061A70] bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: 'url("/assets/home-loan-visual.png")',
+        }}
+      >
+        {/* Subtle overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#061A70]/20 via-[#061A70]/5 to-transparent" />
 
-        <div className="absolute -right-[260px] -top-[280px] h-[700px] w-[700px] rounded-full border border-[#00C6FF]/20" />
-
-        <div className="mx-auto grid min-h-[700px] max-w-[1500px] items-center gap-12 px-6 py-16 lg:grid-cols-[1.05fr_.95fr] lg:px-10">
-          <div className="home-reveal relative z-10 max-w-[720px]">
-            <p className="mb-5 text-sm font-bold tracking-[.16em] text-[#00C6FF]">
-              YES GENESIS FINTECH
+        <div className="relative z-10 mx-auto flex min-h-[720px] max-w-container items-center px-6 py-16 md:px-8">
+          <div className="home-reveal w-full max-w-[720px]">
+            <p className="mb-5 text-sm font-bold uppercase tracking-[0.16em] text-[#2EB9F0] md:text-base">
+              HOME FINANCE
             </p>
 
-            <h1 className="text-5xl font-extrabold leading-[.98] tracking-[-.04em] text-white sm:text-6xl lg:text-[72px]">
+            <h1 className="text-[48px] font-extrabold leading-[0.98] tracking-[-0.025em] text-white sm:text-[58px] md:text-[68px] lg:text-[76px]">
               Turn Your
-              <span className="block text-[#39B5E8]">Dream Home</span>
-              <span className="block">Into Reality</span>
+              <span className="block text-[#36B8F0]">
+                Dream Home
+              </span>
+              <span className="block text-white">
+                Into Reality
+              </span>
             </h1>
 
             <div className="mt-7 h-1 w-24 bg-[#00C6FF]" />
 
-            <p className="mt-7 max-w-[680px] text-lg font-medium leading-8 text-white/85 sm:text-xl">
+            <p className="mt-7 max-w-[760px] text-base font-medium leading-7 text-white md:text-xl md:leading-8">
               Explore flexible home loan solutions through our trusted network
               of banks and NBFCs. Simple process, expert assistance and
               multiple lending options.
@@ -235,7 +221,7 @@ export default function HomeLoanPage() {
                   setSubmitted(false);
                   setShowForm(true);
                 }}
-                className="group rounded-xl bg-[#39B5E8] px-9 py-4 text-lg font-bold text-white shadow-lg transition-all hover:-translate-y-1 hover:bg-[#27A7DB] hover:shadow-2xl"
+                className="group inline-flex min-h-[64px] items-center justify-center rounded-xl bg-[#38B5E8] px-10 py-4 text-lg font-bold text-white shadow-lg transition hover:-translate-y-1 hover:bg-[#25A7DC] hover:shadow-xl"
               >
                 Apply Now
                 <span className="ml-2 transition-transform group-hover:translate-x-1">
@@ -245,79 +231,24 @@ export default function HomeLoanPage() {
 
               <Link
                 href="/emi-calculator"
-                className="rounded-xl border-2 border-[#00C6FF] px-9 py-4 text-lg font-bold text-[#00C6FF] transition-all hover:-translate-y-1 hover:bg-[#00C6FF] hover:text-[#071B72]"
+                className="inline-flex min-h-[64px] items-center justify-center rounded-xl border-2 border-[#00C6FF] px-10 py-4 text-lg font-bold text-[#00C6FF] transition hover:-translate-y-1 hover:bg-[#00C6FF] hover:text-[#061A70]"
               >
                 Calculate EMI
               </Link>
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-6 text-sm font-semibold text-white/65">
+            <div className="mt-8 flex flex-wrap gap-6 text-sm font-semibold text-white/75">
               <span>✓ Multiple Lenders</span>
               <span>✓ Flexible Tenure</span>
               <span>✓ Assisted Process</span>
             </div>
           </div>
-
-          {/* HERO VISUAL */}
-          <div className="relative flex min-h-[480px] items-center justify-center">
-            <div className="home-float relative w-full max-w-[600px]">
-              <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#00C6FF]/15 blur-3xl" />
-
-              <div className="home-orbit absolute left-1/2 top-1/2 h-[470px] w-[470px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#00C6FF]/15" />
-
-              <div className="relative mx-auto w-[78%] rounded-[36px] border border-white/20 bg-white/10 p-5 shadow-2xl backdrop-blur-xl sm:p-7">
-                <div className="overflow-hidden rounded-[28px] bg-white">
-                  <div className="relative h-[330px] overflow-hidden bg-gradient-to-br from-[#EAF8FF] to-[#D7F1FA]">
-                    <div className="absolute right-10 top-10 h-14 w-14 rounded-full bg-[#FFD76A]" />
-
-                    <div className="absolute bottom-0 h-[35%] w-full bg-[#BDE8C7]" />
-
-                    <div className="absolute bottom-[18%] left-1/2 -translate-x-1/2">
-                      <div className="mx-auto h-0 w-0 border-b-[90px] border-l-[140px] border-r-[140px] border-b-[#171C5C] border-l-transparent border-r-transparent" />
-
-                      <div className="relative mx-auto h-[140px] w-[220px] bg-white shadow-xl">
-                        <div className="absolute left-6 top-8 h-12 w-12 border-4 border-[#171C5C] bg-[#B9EAF8]" />
-                        <div className="absolute right-6 top-8 h-12 w-12 border-4 border-[#171C5C] bg-[#B9EAF8]" />
-                        <div className="absolute bottom-0 left-1/2 h-20 w-12 -translate-x-1/2 rounded-t-md bg-[#39B5E8]" />
-                      </div>
-                    </div>
-
-                    <div className="absolute bottom-[18%] left-[8%] h-12 w-12 rounded-full bg-[#55B96B]" />
-                    <div className="absolute bottom-[18%] right-[8%] h-12 w-12 rounded-full bg-[#55B96B]" />
-                  </div>
-
-                  <div className="flex items-center justify-between px-6 py-5">
-                    <div>
-                      <p className="text-xs font-bold tracking-widest text-[#39B5E8]">
-                        HOME LOAN
-                      </p>
-                      <p className="mt-1 text-lg font-extrabold">
-                        Your Dream Home
-                      </p>
-                    </div>
-
-                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#EAF8FC] text-xl text-[#39B5E8]">
-                      →
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="absolute left-0 top-[18%] rounded-2xl border border-white/20 bg-white/10 px-5 py-4 text-white shadow-xl backdrop-blur-xl">
-                <p className="text-xs text-white/60">Flexible</p>
-                <p className="font-bold">Loan Options</p>
-              </div>
-
-              <div className="absolute bottom-[15%] right-0 rounded-2xl border border-white/20 bg-white/10 px-5 py-4 text-white shadow-xl backdrop-blur-xl">
-                <p className="text-xs text-white/60">Assisted</p>
-                <p className="font-bold">Application</p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* BENEFITS */}
+      {/* =====================================================
+          BENEFITS
+      ===================================================== */}
       <section className="px-6 py-24 sm:px-10 lg:px-16">
         <div className="mx-auto max-w-[1300px]">
           <p className="text-sm font-bold tracking-[.16em] text-[#39B5E8]">
@@ -337,24 +268,34 @@ export default function HomeLoanPage() {
                 <span className="text-sm font-bold text-[#39B5E8]">
                   {item.number}
                 </span>
-                <h3 className="mt-8 text-xl font-extrabold">{item.title}</h3>
-                <p className="mt-4 leading-7 text-gray-600">{item.text}</p>
+
+                <h3 className="mt-8 text-xl font-extrabold">
+                  {item.title}
+                </h3>
+
+                <p className="mt-4 leading-7 text-gray-600">
+                  {item.text}
+                </p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* FEATURES */}
+      {/* =====================================================
+          FEATURES
+      ===================================================== */}
       <section className="bg-[#F5FAFD] px-6 py-24">
         <div className="mx-auto grid max-w-[1300px] gap-14 lg:grid-cols-2">
           <div>
             <p className="text-sm font-bold tracking-[.16em] text-[#39B5E8]">
               SOLUTIONS
             </p>
+
             <h2 className="mt-3 text-4xl font-extrabold sm:text-5xl">
               Designed Around Your Home
             </h2>
+
             <p className="mt-6 max-w-xl leading-8 text-gray-600">
               Explore lending solutions suited to your property purchase and
               financial requirements.
@@ -370,27 +311,38 @@ export default function HomeLoanPage() {
                 <span className="text-sm font-bold text-[#39B5E8]">
                   0{index + 1}
                 </span>
-                <p className="mt-4 font-bold">{item}</p>
+
+                <p className="mt-4 font-bold">
+                  {item}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ELIGIBILITY + DOCUMENTS */}
+      {/* =====================================================
+          ELIGIBILITY + DOCUMENTS
+      ===================================================== */}
       <section className="px-6 py-24 sm:px-10 lg:px-16">
         <div className="mx-auto grid max-w-[1300px] gap-8 lg:grid-cols-2">
           <div className="rounded-3xl bg-[#071B72] p-8 text-white sm:p-10">
             <p className="text-sm font-bold tracking-[.16em] text-[#39B5E8]">
               ELIGIBILITY
             </p>
-            <h2 className="mt-3 text-3xl font-extrabold">Who Can Apply?</h2>
+
+            <h2 className="mt-3 text-3xl font-extrabold">
+              Who Can Apply?
+            </h2>
 
             <div className="mt-8 space-y-4">
               {eligibility.map((item) => (
                 <div key={item} className="flex gap-3">
                   <span className="text-[#39B5E8]">✓</span>
-                  <span className="text-white/80">{item}</span>
+
+                  <span className="text-white/80">
+                    {item}
+                  </span>
                 </div>
               ))}
             </div>
@@ -400,15 +352,21 @@ export default function HomeLoanPage() {
             <p className="text-sm font-bold tracking-[.16em] text-[#39B5E8]">
               DOCUMENTS
             </p>
+
             <h2 className="mt-3 text-3xl font-extrabold">
               What You May Need
             </h2>
 
             <div className="mt-8 space-y-4">
-              {documents.map((item) => (
+              {documents.map((item, index) => (
                 <div key={item} className="flex gap-3">
-                  <span className="font-bold text-[#39B5E8]">01</span>
-                  <span className="text-gray-600">{item}</span>
+                  <span className="font-bold text-[#39B5E8]">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+
+                  <span className="text-gray-600">
+                    {item}
+                  </span>
                 </div>
               ))}
             </div>
@@ -416,12 +374,15 @@ export default function HomeLoanPage() {
         </div>
       </section>
 
-      {/* PROCESS */}
+      {/* =====================================================
+          PROCESS
+      ===================================================== */}
       <section className="bg-[#071B72] px-6 py-24 text-white">
         <div className="mx-auto max-w-[1300px]">
           <p className="text-sm font-bold tracking-[.16em] text-[#39B5E8]">
             SIMPLE PROCESS
           </p>
+
           <h2 className="mt-3 text-4xl font-extrabold sm:text-5xl">
             From Application to Home
           </h2>
@@ -435,20 +396,29 @@ export default function HomeLoanPage() {
                 <span className="text-4xl font-extrabold text-[#39B5E8]">
                   {number}
                 </span>
-                <h3 className="mt-7 text-xl font-extrabold">{title}</h3>
-                <p className="mt-4 leading-7 text-white/65">{text}</p>
+
+                <h3 className="mt-7 text-xl font-extrabold">
+                  {title}
+                </h3>
+
+                <p className="mt-4 leading-7 text-white/65">
+                  {text}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* =====================================================
+          FAQ
+      ===================================================== */}
       <section className="px-6 py-24 sm:px-10">
         <div className="mx-auto max-w-[900px]">
           <p className="text-center text-sm font-bold tracking-[.16em] text-[#39B5E8]">
             FAQ
           </p>
+
           <h2 className="mt-3 text-center text-4xl font-extrabold">
             Home Loan Questions
           </h2>
@@ -466,6 +436,7 @@ export default function HomeLoanPage() {
                   className="flex w-full items-center justify-between p-6 text-left font-bold"
                 >
                   {question}
+
                   <span className="text-2xl text-[#39B5E8]">
                     {openFaq === index ? "−" : "+"}
                   </span>
@@ -482,15 +453,19 @@ export default function HomeLoanPage() {
         </div>
       </section>
 
-      {/* FINAL CTA */}
+      {/* =====================================================
+          FINAL CTA
+      ===================================================== */}
       <section className="px-6 pb-24">
         <div className="mx-auto max-w-[1300px] overflow-hidden rounded-[36px] bg-[#071B72] p-10 text-center text-white sm:p-16">
           <p className="font-bold tracking-[.16em] text-[#39B5E8]">
             READY TO START?
           </p>
+
           <h2 className="mx-auto mt-4 max-w-3xl text-4xl font-extrabold sm:text-5xl">
             Take the First Step Towards Your Dream Home
           </h2>
+
           <button
             onClick={() => {
               setSubmitted(false);
@@ -503,7 +478,9 @@ export default function HomeLoanPage() {
         </div>
       </section>
 
-      {/* FORM */}
+      {/* =====================================================
+          APPLICATION FORM
+      ===================================================== */}
       {showForm && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-5">
           <div className="max-h-[90vh] w-full max-w-xl overflow-y-auto rounded-3xl bg-white p-7 shadow-2xl sm:p-10">
@@ -512,6 +489,7 @@ export default function HomeLoanPage() {
                 <p className="text-sm font-bold text-[#39B5E8]">
                   HOME LOAN
                 </p>
+
                 <h2 className="mt-1 text-3xl font-extrabold">
                   Apply Now
                 </h2>
@@ -520,6 +498,7 @@ export default function HomeLoanPage() {
               <button
                 onClick={() => setShowForm(false)}
                 className="text-2xl text-gray-500"
+                aria-label="Close application form"
               >
                 ×
               </button>
@@ -530,12 +509,15 @@ export default function HomeLoanPage() {
                 <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#E8F8FC] text-3xl text-[#39B5E8]">
                   ✓
                 </div>
+
                 <h3 className="mt-5 text-2xl font-extrabold">
                   Thank You!
                 </h3>
+
                 <p className="mt-3 text-gray-600">
                   Your enquiry has been submitted successfully.
                 </p>
+
                 <button
                   onClick={() => setShowForm(false)}
                   className="mt-7 rounded-xl bg-[#071B72] px-7 py-3 font-bold text-white"
@@ -544,7 +526,10 @@ export default function HomeLoanPage() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+              <form
+                onSubmit={handleSubmit}
+                className="mt-8 space-y-5"
+              >
                 <input
                   value={name}
                   onChange={(e) => setName(e.target.value)}
