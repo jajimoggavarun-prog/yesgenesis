@@ -118,52 +118,87 @@ export default function PersonalLoanPage() {
 
 
       {/* =====================================================
-          PERSONAL LOAN HERO
-          Background artwork: /public/assets/personal-loan-visual.png
-      ===================================================== */}
-      <section
-        className="relative min-h-[720px] overflow-hidden bg-[#061A70] bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url("/assets/personal-loan-visual.png")' }}
-      >
-        {/* Subtle overlay keeps the left-side typography crisp while
-            preserving the supplied artwork on the right. */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#061A70]/10 via-transparent to-transparent" />
+    PERSONAL LOAN HERO
+    Background: /public/assets/personal-loan-visual.png
+===================================================== */}
+<section
+  className="relative min-h-[650px] overflow-hidden bg-[#061A70] bg-cover bg-center bg-no-repeat md:min-h-[680px]"
+  style={{
+    backgroundImage: 'url("/assets/personal-loan-visual.png")',
+  }}
+>
+  {/* Overlay */}
+  <div className="absolute inset-0 bg-gradient-to-r from-[#061A70]/70 via-[#061A70]/25 to-transparent" />
 
-        <div className="relative z-10 mx-auto flex min-h-[720px] max-w-container items-center px-6 py-16 md:px-8">
-          <div className="w-full max-w-[700px]">
-            <p className="mb-5 text-sm font-bold uppercase tracking-[0.16em] text-[#2EB9F0] md:text-base">
-              PERSONAL FINANCE
-            </p>
+  <div className="relative z-10 mx-auto flex min-h-[650px] max-w-container items-center px-6 py-16 md:min-h-[680px] md:px-8 lg:px-12">
+    
+    {/* =================================================
+        HERO CONTENT
+    ================================================= */}
+    <div className="w-full max-w-[610px]">
 
-            <h1 className="text-[48px] font-extrabold leading-[0.98] tracking-[-0.025em] text-white sm:text-[58px] md:text-[68px] lg:text-[76px]">
-              Avail Up To
-              <span className="block text-[#36B8F0]">
-                50,00,000
-              </span>
-              <span className="block text-white">
-                Personal Loan in Just Few
-              </span>
-              <span className="block text-white">
-                Clicks!
-              </span>
-            </h1>
+      {/* Eyebrow */}
+      <p className="mb-4 text-sm font-bold uppercase tracking-[0.14em] text-[#38B5E8] md:text-base">
+        PERSONAL FINANCE
+      </p>
 
-            <p className="mt-8 max-w-[760px] text-base font-medium leading-7 text-white md:text-xl md:leading-8">
-              100% Paperless Process | up to 72 months tenure | starts @ 10.5% p.a.
-            </p>
+      {/* Heading */}
+      <h1 className="font-extrabold leading-[1.02] tracking-[-0.02em] text-white">
+        <span className="block text-[44px] sm:text-[50px] md:text-[58px] lg:text-[64px]">
+          Avail Up To
+        </span>
 
-            <div className="mt-9">
-              <Link
-                href="/apply"
-                className="inline-flex min-h-[64px] items-center justify-center rounded-xl bg-[#38B5E8] px-10 py-4 text-lg font-bold text-white shadow-lg transition hover:bg-[#25A7DC]"
-              >
-                Apply Now
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+        <span className="block text-[48px] leading-[1] text-[#38B5E8] sm:text-[56px] md:text-[64px] lg:text-[70px]">
+          ₹50,00,000
+        </span>
 
+        <span className="mt-1 block text-[38px] leading-[1.08] sm:text-[44px] md:text-[50px] lg:text-[56px]">
+          Personal Loan
+        </span>
+
+        <span className="block text-[38px] leading-[1.08] sm:text-[44px] md:text-[50px] lg:text-[56px]">
+          in Just Few Clicks!
+        </span>
+      </h1>
+
+      {/* Description */}
+      <p className="mt-6 max-w-[590px] text-[15px] font-medium leading-6 text-white sm:text-base sm:leading-7 md:mt-7 md:text-lg md:leading-8">
+        100% Paperless Process | Up to 72 months tenure | Starts @ 10.5% p.a.
+      </p>
+
+      {/* CTA */}
+      <div className="mt-7 md:mt-8">
+        <Link
+          href="/apply"
+          className="
+            inline-flex
+            min-h-[54px]
+            items-center
+            justify-center
+            rounded-xl
+            bg-[#38B5E8]
+            px-8
+            py-3
+            text-base
+            font-bold
+            text-white
+            shadow-lg
+            transition-all
+            duration-200
+            hover:-translate-y-0.5
+            hover:bg-[#25A7DC]
+            hover:shadow-xl
+            sm:px-9
+            sm:text-lg
+          "
+        >
+          Apply Now
+        </Link>
+      </div>
+
+    </div>
+  </div>
+</section>
       {/* =====================================================
           INTRO
       ===================================================== */}

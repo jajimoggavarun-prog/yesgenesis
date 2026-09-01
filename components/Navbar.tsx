@@ -49,14 +49,14 @@ export default function Navbar() {
       {/* =====================================================
           TOP CONTACT BAR
       ====================================================== */}
-      <div className="hidden items-center justify-between bg-[#18205B] px-6 py-3 text-white md:flex md:px-10">
+      <div className="hidden h-[46px] items-center justify-between bg-[#18205B] px-6 text-white md:flex md:px-10">
 
         {/* Contact */}
-        <div className="text-sm font-medium">
+        <div className="flex items-center text-sm font-medium leading-none">
           Contact Us:{" "}
           <a
             href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
-            className="transition-colors duration-200 hover:text-[#00C8F8]"
+            className="ml-1 transition-colors duration-200 hover:text-[#00C8F8]"
           >
             {siteConfig.phone}
           </a>
@@ -65,19 +65,19 @@ export default function Navbar() {
         {/* =================================================
             SOCIAL MEDIA ICONS
         ================================================== */}
-        <div className="flex items-center gap-5">
+        <div className="flex h-full items-center gap-3">
 
           {/* Instagram */}
           <a
-            href="https://www.instagram.com/"
+            href="https://www.instagram.com/yesgenesis_fintech/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
-            className="text-white transition-colors duration-200 hover:text-[#00C8F8]"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-white transition-all duration-200 hover:bg-white/10 hover:text-[#00C8F8]"
           >
             <svg
-              width="21"
-              height="21"
+              width="19"
+              height="19"
               viewBox="0 0 24 24"
               fill="none"
               aria-hidden="true"
@@ -111,15 +111,15 @@ export default function Navbar() {
 
           {/* Facebook */}
           <a
-            href="https://www.facebook.com/"
+            href="https://www.facebook.com/people/YesGenesis-Fintech/pfbid02f3SEC1yon66daGfAot2zfGDc94ok7TP2qThGgxhq1ugAVU92WNDnsxvtqU1KpJZNl/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
-            className="text-white transition-colors duration-200 hover:text-[#00C8F8]"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-white transition-all duration-200 hover:bg-white/10 hover:text-[#00C8F8]"
           >
             <svg
-              width="21"
-              height="21"
+              width="19"
+              height="19"
               viewBox="0 0 24 24"
               fill="currentColor"
               aria-hidden="true"
@@ -130,11 +130,11 @@ export default function Navbar() {
 
           {/* X */}
           <a
-            href="https://x.com/"
+            href="https://x.com/SGenesisFinTech"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="X"
-            className="flex h-[21px] w-[21px] items-center justify-center text-white transition-colors duration-200 hover:text-[#00C8F8]"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-white transition-all duration-200 hover:bg-white/10 hover:text-[#00C8F8]"
           >
             <svg
               width="18"
@@ -149,15 +149,15 @@ export default function Navbar() {
 
           {/* YouTube */}
           <a
-            href="https://www.youtube.com/"
+            href="https://www.youtube.com/@YesGenesisFintech"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="YouTube"
-            className="text-white transition-colors duration-200 hover:text-[#00C8F8]"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-white transition-all duration-200 hover:bg-white/10 hover:text-[#00C8F8]"
           >
             <svg
-              width="23"
-              height="23"
+              width="20"
+              height="20"
               viewBox="0 0 24 24"
               fill="currentColor"
               aria-hidden="true"
@@ -176,7 +176,7 @@ export default function Navbar() {
         className="bg-white"
         aria-label="Primary navigation"
       >
-        <div className="max-w-container mx-auto flex items-center justify-between px-6 py-3 md:px-10">
+        <div className="mx-auto flex items-center justify-between px-6 py-3 md:px-10 max-w-container">
 
           {/* =================================================
               LOGO
@@ -242,11 +242,9 @@ export default function Navbar() {
                 Loans
 
                 <svg
-                  className={`
-                    transition-transform
-                    duration-200
-                    ${loansOpen ? "rotate-180" : ""}
-                  `}
+                  className={`transition-transform duration-200 ${
+                    loansOpen ? "rotate-180" : ""
+                  }`}
                   width="10"
                   height="6"
                   viewBox="0 0 12 8"
@@ -435,7 +433,6 @@ export default function Navbar() {
               lg:hidden
             "
           >
-
             <ul
               className="
                 flex
@@ -465,7 +462,6 @@ export default function Navbar() {
 
               {/* MOBILE LOANS */}
               <li>
-
                 <button
                   type="button"
                   className="
@@ -486,11 +482,9 @@ export default function Navbar() {
                   Loans
 
                   <svg
-                    className={`
-                      transition-transform
-                      duration-200
-                      ${loansOpen ? "rotate-180" : ""}
-                    `}
+                    className={`transition-transform duration-200 ${
+                      loansOpen ? "rotate-180" : ""
+                    }`}
                     width="12"
                     height="8"
                     viewBox="0 0 12 8"
@@ -534,7 +528,6 @@ export default function Navbar() {
                     ))}
                   </ul>
                 )}
-
               </li>
 
               {/* CIBIL SCORE */}
