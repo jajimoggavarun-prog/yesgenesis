@@ -104,11 +104,11 @@ export default function PrivacyPolicyPage() {
       </li>
 
       <li>
-        <strong>Company</strong> (referred to as either "the Company",
-        "We", "Us" or "Our" in this Agreement) refers to YES GENESIS
-        FINTECH PVT LTD, 302 3rd floor H-NO.6-2-953 Krishna Plaza,
-        Khairatabad, Hyderabad-500004.
-      </li>
+  <strong>Company</strong> (referred to as either &quot;the Company&quot;,
+  &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot; in this Agreement)
+  refers to YES GENESIS FINTECH PVT LTD, 302 3rd floor H-NO.6-2-953
+  Krishna Plaza, Khairatabad, Hyderabad-500004.
+</li>
 
     </ul>
   </div>
