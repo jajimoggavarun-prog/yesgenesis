@@ -106,7 +106,7 @@ export default function StatCard({
   md:h-20
   md:w-20
   object-contain
-  ${label === "Branch Locations" ? "scale-125" : ""}
+  ${label === "Branch Locations" ? "scale-[1.6]" : ""}
 `}
       />
 
