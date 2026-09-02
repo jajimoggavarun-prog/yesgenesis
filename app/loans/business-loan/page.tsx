@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 // Business loan page - deployment refresh
 
 import Link from "next/link";
@@ -39,7 +39,7 @@ const solutions = [
 ];
 
 const eligibility = [
-  "Minimum monthly income of â‚¹15,000",
+  "Minimum monthly income of ₹15,000",
   "Minimum age of 21 years",
   "Stable source of income",
   "Salaried or self-employed applicant",
@@ -222,14 +222,14 @@ export default function BusinessLoanPage() {
       </p>
 
       <div className="mt-8 flex flex-wrap gap-5 text-sm font-semibold text-white/80">
-        <span>âœ“ Paperless Process</span>
-        <span>âœ“ Flexible Tenure</span>
-        <span>âœ“ Competitive Rates</span>
+        <span>✓ Paperless Process</span>
+        <span>✓ Flexible Tenure</span>
+        <span>✓ Competitive Rates</span>
       </div>
 
       <div className="mt-9 flex flex-wrap gap-4">
 
-        {/* Apply button â€” keeps your existing enquiry modal */}
+        {/* Apply button — keeps your existing enquiry modal */}
         <button
           onClick={() => {
             window.location.href = "/apply?loan=business";
@@ -239,7 +239,7 @@ export default function BusinessLoanPage() {
           Apply for Business Loan
 
           <span className="ml-2 inline-block transition-transform group-hover:translate-x-1">
-            â†’
+            →
           </span>
         </button>
 
@@ -332,7 +332,7 @@ export default function BusinessLoanPage() {
               }}
               className="mt-8 rounded-xl bg-[#071B72] px-7 py-4 font-bold text-white transition hover:-translate-y-1 hover:bg-[#10278A]"
             >
-              Discuss Your Requirement â†’
+              Discuss Your Requirement →
             </button>
           </div>
 
@@ -348,7 +348,7 @@ export default function BusinessLoanPage() {
                   </span>
 
                   <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#EAF8FC] text-[#39B5E8] transition group-hover:bg-[#39B5E8] group-hover:text-white">
-                    â†’
+                    →
                   </span>
                 </div>
 
@@ -383,7 +383,7 @@ export default function BusinessLoanPage() {
                 {eligibility.map((item) => (
                   <div key={item} className="flex gap-3">
                     <span className="text-xl font-bold text-[#00C6FF]">
-                      âœ“
+                      ✓
                     </span>
 
                     <span className="text-slate-600">
@@ -408,7 +408,7 @@ export default function BusinessLoanPage() {
                 {documents.map((item) => (
                   <div key={item} className="flex gap-3">
                     <span className="text-xl font-bold text-[#00C6FF]">
-                      âœ“
+                      ✓
                     </span>
 
                     <span className="text-white/85">
@@ -519,7 +519,7 @@ export default function BusinessLoanPage() {
                           : "bg-[#EAF8FC] text-[#39B5E8]"
                       }`}
                     >
-                      {isOpen ? "âˆ’" : "+"}
+                      {isOpen ? "−" : "+"}
                     </span>
                   </button>
 
@@ -571,7 +571,7 @@ export default function BusinessLoanPage() {
               }}
               className="mt-9 rounded-xl bg-[#39B5E8] px-9 py-4 font-bold text-white shadow-lg transition-all hover:-translate-y-1 hover:bg-[#27A7DB]"
             >
-              Apply for Business Loan â†’
+              Apply for Business Loan →
             </button>
           </div>
         </div>

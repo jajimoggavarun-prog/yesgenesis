@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -38,7 +38,7 @@ const features = [
 ];
 
 const eligibility = [
-  "Minimum monthly income of â‚¹15,000",
+  "Minimum monthly income of ₹15,000",
   "Minimum age of 21 years",
   "Stable source of income",
   "Salaried or self-employed applicant",
@@ -137,9 +137,9 @@ export default function CarLoanPage() {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-5 text-sm font-semibold text-white/80">
-              <span>âœ“ Flexible Tenure</span>
-              <span>âœ“ Multiple Lenders</span>
-              <span>âœ“ Simple Process</span>
+              <span>✓ Flexible Tenure</span>
+              <span>✓ Multiple Lenders</span>
+              <span>✓ Simple Process</span>
             </div>
 
             <div className="mt-9 flex flex-wrap gap-4">
@@ -152,7 +152,7 @@ export default function CarLoanPage() {
                 Apply for Car Loan
 
                 <span className="ml-2 inline-block transition-transform group-hover:translate-x-1">
-                  â†’
+                  →
                 </span>
               </button>
 
@@ -229,7 +229,7 @@ export default function CarLoanPage() {
               {eligibility.map((item) => (
                 <div key={item} className="flex gap-3">
                   <span className="text-[#39B5E8]">
-                    âœ“
+                    ✓
                   </span>
 
                   <span className="text-white/80">
@@ -253,7 +253,7 @@ export default function CarLoanPage() {
               {documents.map((item) => (
                 <div key={item} className="flex gap-3">
                   <span className="text-[#39B5E8]">
-                    âœ“
+                    ✓
                   </span>
 
                   <span className="text-gray-600">
@@ -330,7 +330,7 @@ export default function CarLoanPage() {
                   {question}
 
                   <span className="text-2xl text-[#39B5E8]">
-                    {openFaq === index ? "âˆ’" : "+"}
+                    {openFaq === index ? "−" : "+"}
                   </span>
                 </button>
 
@@ -365,7 +365,7 @@ export default function CarLoanPage() {
             }}
             className="mt-9 rounded-xl bg-[#39B5E8] px-9 py-4 font-bold text-white transition hover:-translate-y-1 hover:bg-[#27A7DB]"
           >
-            Apply Now â†’
+            Apply Now →
           </button>
         </div>
       </section>

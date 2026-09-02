@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -38,7 +38,7 @@ const features = [
 ];
 
 const eligibility = [
-  "Minimum monthly income of â‚¹15,000",
+  "Minimum monthly income of ₹15,000",
   "Minimum age of 21 years",
   "Stable source of income",
   "Salaried or self-employed applicant",
@@ -159,7 +159,7 @@ export default function HomeLoanPage() {
               >
                 Apply Now
                 <span className="ml-2 transition-transform group-hover:translate-x-1">
-                  â†’
+                  →
                 </span>
               </button>
 
@@ -172,9 +172,9 @@ export default function HomeLoanPage() {
             </div>
 
             <div className="mt-8 flex flex-wrap gap-6 text-sm font-semibold text-white/75">
-              <span>âœ“ Multiple Lenders</span>
-              <span>âœ“ Flexible Tenure</span>
-              <span>âœ“ Assisted Process</span>
+              <span>✓ Multiple Lenders</span>
+              <span>✓ Flexible Tenure</span>
+              <span>✓ Assisted Process</span>
             </div>
           </div>
         </div>
@@ -272,7 +272,7 @@ export default function HomeLoanPage() {
             <div className="mt-8 space-y-4">
               {eligibility.map((item) => (
                 <div key={item} className="flex gap-3">
-                  <span className="text-[#39B5E8]">âœ“</span>
+                  <span className="text-[#39B5E8]">✓</span>
 
                   <span className="text-white/80">
                     {item}
@@ -372,7 +372,7 @@ export default function HomeLoanPage() {
                   {question}
 
                   <span className="text-2xl text-[#39B5E8]">
-                    {openFaq === index ? "âˆ’" : "+"}
+                    {openFaq === index ? "−" : "+"}
                   </span>
                 </button>
 
@@ -406,7 +406,7 @@ export default function HomeLoanPage() {
             }}
             className="mt-9 rounded-xl bg-[#39B5E8] px-9 py-4 font-bold transition hover:-translate-y-1 hover:bg-[#27A7DB]"
           >
-            Apply Now â†’
+            Apply Now →
           </button>
         </div>
       </section>
