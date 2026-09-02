@@ -4,6 +4,7 @@ import { footerColumns, siteConfig, socialLinks } from "@/lib/data";
 function SocialIcon({ label }: { label: string }) {
   const name = label.toLowerCase();
 
+  // Instagram
   if (name.includes("instagram")) {
     return (
       <svg
@@ -16,11 +17,18 @@ function SocialIcon({ label }: { label: string }) {
       >
         <rect x="3" y="3" width="18" height="18" rx="5" />
         <circle cx="12" cy="12" r="4" />
-        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+        <circle
+          cx="17.5"
+          cy="6.5"
+          r="1"
+          fill="currentColor"
+          stroke="none"
+        />
       </svg>
     );
   }
 
+  // Facebook
   if (name.includes("facebook")) {
     return (
       <svg
@@ -34,6 +42,7 @@ function SocialIcon({ label }: { label: string }) {
     );
   }
 
+  // X / Twitter
   if (name.includes("twitter") || name === "x") {
     return (
       <svg
@@ -47,6 +56,7 @@ function SocialIcon({ label }: { label: string }) {
     );
   }
 
+  // YouTube
   if (name.includes("youtube")) {
     return (
       <svg
@@ -60,6 +70,21 @@ function SocialIcon({ label }: { label: string }) {
     );
   }
 
+  // LinkedIn
+  if (name.includes("linkedin")) {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        className="h-5 w-5"
+        aria-hidden="true"
+      >
+        <path d="M6.5 8.25H3.25V21H6.5V8.25ZM4.88 3A1.88 1.88 0 1 0 4.88 6.75 1.88 1.88 0 0 0 4.88 3ZM21 13.69C21 9.85 18.95 8.06 16.22 8.06C14.02 8.06 13.04 9.27 12.5 10.12V8.25H9.25V21H12.5V14.68C12.5 13.01 12.82 11.4 14.92 11.4C16.99 11.4 17.02 13.31 17.02 14.79V21H21V13.69Z" />
+      </svg>
+    );
+  }
+
+  // Fallback
   return <span className="text-xs font-bold">{label[0]}</span>;
 }
 
@@ -68,6 +93,8 @@ export default function Footer() {
     <footer className="bg-midnight text-white">
       <div className="max-w-container mx-auto px-4 md:px-8 py-14">
         <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-10">
+          
+          {/* Company Info */}
           <div>
             <p className="text-2xl font-bold">
               Yes Genesis <span className="text-brand-cyan">Fintech</span>
@@ -77,6 +104,7 @@ export default function Footer() {
               {siteConfig.description}
             </p>
 
+            {/* Social Media */}
             <ul className="mt-6 flex gap-4">
               {socialLinks.map((s) => (
                 <li key={s.label}>
@@ -85,6 +113,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.label}
+                    title={s.label}
                     className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 text-white transition-all duration-200 hover:border-brand-cyan hover:bg-brand-cyan hover:text-white"
                   >
                     <SocialIcon label={s.label} />
@@ -94,6 +123,7 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Footer Navigation */}
           <nav
             aria-label="Footer"
             className="grid grid-cols-2 sm:grid-cols-3 gap-10"
@@ -156,6 +186,7 @@ export default function Footer() {
         </div>
       </div>
 
+      {/* Copyright */}
       <div className="border-t border-white/10">
         <div className="max-w-container mx-auto px-4 md:px-8 py-6 flex flex-col sm:flex-row items-center justify-center gap-2 text-center text-sm text-white/80">
           <span className="font-bold">

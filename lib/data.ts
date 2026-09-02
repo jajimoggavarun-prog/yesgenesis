@@ -226,14 +226,14 @@ export const footerColumns: (
 export const socialLinks = [
   {
     label: "Facebook",
-    href: "https://facebook.com",
+    href: "https://www.facebook.com/people/YesGenesis-Fintech/pfbid0bVo3GrMSw43oZtkswhiPSZSNVQbp3avAvH9zJXE2Yifa2FZpjAZ9TPVBJw1H71Asl/",
   },
   {
     label: "Instagram",
-    href: "https://instagram.com",
+    href: "https://www.instagram.com/yesgenesis_fintech/",
   },
   {
     label: "LinkedIn",
-    href: "https://linkedin.com",
+    href: "https://www.linkedin.com/company/yes-genesis-fintech-pvt-ltd/?originalSubdomain=in",
   },
 ];
