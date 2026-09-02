@@ -169,7 +169,7 @@ export default function PersonalLoanPage() {
       {/* CTA */}
       <div className="mt-7 md:mt-8">
         <Link
-          href="/apply"
+          href="/apply?loan=personal"
           className="
             inline-flex
             min-h-[54px]
@@ -522,7 +522,7 @@ export default function PersonalLoanPage() {
 
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link
-              href="/apply"
+              href="/apply?loan=personal"
               className="rounded-xl bg-white px-8 py-4 font-bold text-[#071B72] transition hover:bg-[#00C6FF] hover:text-white"
             >
               Apply Now

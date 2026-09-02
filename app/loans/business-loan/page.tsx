@@ -1,12 +1,10 @@
-"use client";
+﻿"use client";
 // Business loan page - deployment refresh
 
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 
-const GOOGLE_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbydxLXPj5igse4DkmHYQdQZeSP_40j29P6DDzrihygsvBVO6iwm92j8A2yaDr-uwlm0/exec";
 
 const benefits = [
   {
@@ -41,7 +39,7 @@ const solutions = [
 ];
 
 const eligibility = [
-  "Minimum monthly income of ₹15,000",
+  "Minimum monthly income of â‚¹15,000",
   "Minimum age of 21 years",
   "Stable source of income",
   "Salaried or self-employed applicant",
@@ -110,69 +108,6 @@ const faqs = [
 
 export default function BusinessLoanPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [showForm, setShowForm] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-
-  const [name, setName] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    const cleanName = name.trim();
-    const cleanMobile = mobile.replace(/\s/g, "");
-    const cleanEmail = email.trim();
-
-    if (!cleanName) {
-      alert("Please enter your name.");
-      return;
-    }
-
-    if (!/^[6-9]\d{9}$/.test(cleanMobile)) {
-      alert("Please enter a valid 10-digit Indian mobile number.");
-      return;
-    }
-
-    if (
-      cleanEmail &&
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)
-    ) {
-      alert("Please enter a valid email address.");
-      return;
-    }
-
-    try {
-      setSubmitting(true);
-
-      await fetch(GOOGLE_SCRIPT_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8",
-        },
-        body: JSON.stringify({
-          name: cleanName,
-          mobile: cleanMobile,
-          email: cleanEmail,
-          loanType: "Business Loan",
-          message: message.trim(),
-          source: "Business Loan",
-        }),
-      });
-
-      setSubmitted(true);
-      setName("");
-      setMobile("");
-      setEmail("");
-      setMessage("");
-    } catch {
-      setSubmitted(true);
-    } finally {
-      setSubmitting(false);
-    }
-  }
 
   return (
     <main className="min-h-screen bg-white text-[#171C5C]">
@@ -287,25 +222,24 @@ export default function BusinessLoanPage() {
       </p>
 
       <div className="mt-8 flex flex-wrap gap-5 text-sm font-semibold text-white/80">
-        <span>✓ Paperless Process</span>
-        <span>✓ Flexible Tenure</span>
-        <span>✓ Competitive Rates</span>
+        <span>âœ“ Paperless Process</span>
+        <span>âœ“ Flexible Tenure</span>
+        <span>âœ“ Competitive Rates</span>
       </div>
 
       <div className="mt-9 flex flex-wrap gap-4">
 
-        {/* Apply button — keeps your existing enquiry modal */}
+        {/* Apply button â€” keeps your existing enquiry modal */}
         <button
           onClick={() => {
-            setSubmitted(false);
-            setShowForm(true);
+            window.location.href = "/apply?loan=business";
           }}
           className="group inline-flex min-h-[64px] items-center justify-center rounded-xl bg-[#38B5E8] px-10 py-4 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-[#25A7DC]"
         >
           Apply for Business Loan
 
           <span className="ml-2 inline-block transition-transform group-hover:translate-x-1">
-            →
+            â†’
           </span>
         </button>
 
@@ -394,12 +328,11 @@ export default function BusinessLoanPage() {
 
             <button
               onClick={() => {
-                setSubmitted(false);
-                setShowForm(true);
+                window.location.href = "/apply?loan=business";
               }}
               className="mt-8 rounded-xl bg-[#071B72] px-7 py-4 font-bold text-white transition hover:-translate-y-1 hover:bg-[#10278A]"
             >
-              Discuss Your Requirement →
+              Discuss Your Requirement â†’
             </button>
           </div>
 
@@ -415,7 +348,7 @@ export default function BusinessLoanPage() {
                   </span>
 
                   <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#EAF8FC] text-[#39B5E8] transition group-hover:bg-[#39B5E8] group-hover:text-white">
-                    →
+                    â†’
                   </span>
                 </div>
 
@@ -450,7 +383,7 @@ export default function BusinessLoanPage() {
                 {eligibility.map((item) => (
                   <div key={item} className="flex gap-3">
                     <span className="text-xl font-bold text-[#00C6FF]">
-                      ✓
+                      âœ“
                     </span>
 
                     <span className="text-slate-600">
@@ -475,7 +408,7 @@ export default function BusinessLoanPage() {
                 {documents.map((item) => (
                   <div key={item} className="flex gap-3">
                     <span className="text-xl font-bold text-[#00C6FF]">
-                      ✓
+                      âœ“
                     </span>
 
                     <span className="text-white/85">
@@ -586,7 +519,7 @@ export default function BusinessLoanPage() {
                           : "bg-[#EAF8FC] text-[#39B5E8]"
                       }`}
                     >
-                      {isOpen ? "−" : "+"}
+                      {isOpen ? "âˆ’" : "+"}
                     </span>
                   </button>
 
@@ -634,12 +567,11 @@ export default function BusinessLoanPage() {
 
             <button
               onClick={() => {
-                setSubmitted(false);
-                setShowForm(true);
+                window.location.href = "/apply?loan=business";
               }}
               className="mt-9 rounded-xl bg-[#39B5E8] px-9 py-4 font-bold text-white shadow-lg transition-all hover:-translate-y-1 hover:bg-[#27A7DB]"
             >
-              Apply for Business Loan →
+              Apply for Business Loan â†’
             </button>
           </div>
         </div>
@@ -648,132 +580,8 @@ export default function BusinessLoanPage() {
       {/* =========================================================
           ENQUIRY MODAL
       ========================================================= */}
-
-      {showForm && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-5">
-          <div className="max-h-[90vh] w-full max-w-xl overflow-y-auto rounded-[30px] bg-white p-7 shadow-2xl sm:p-10">
-            <div className="flex items-start justify-between gap-5">
-              <div>
-                <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#39B5E8]">
-                  Business Finance
-                </p>
-
-                <h2 className="mt-2 text-3xl font-extrabold text-[#171C5C]">
-                  Apply Now
-                </h2>
-
-                <p className="mt-2 text-sm text-gray-500">
-                  Tell us about your business finance requirement.
-                </p>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => setShowForm(false)}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-xl text-gray-500 transition hover:bg-gray-200"
-              >
-                ×
-              </button>
-            </div>
-
-            {submitted ? (
-              <div className="py-16 text-center">
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#E8F8FC] text-3xl font-bold text-[#39B5E8]">
-                  ✓
-                </div>
-
-                <h3 className="mt-6 text-2xl font-extrabold text-[#171C5C]">
-                  Thank You!
-                </h3>
-
-                <p className="mt-3 text-gray-600">
-                  Your business loan enquiry has been submitted successfully.
-                </p>
-
-                <button
-                  type="button"
-                  onClick={() => setShowForm(false)}
-                  className="mt-7 rounded-xl bg-[#071B72] px-8 py-3 font-bold text-white transition hover:bg-[#10278A]"
-                >
-                  Close
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="mt-8 space-y-5">
-                <div>
-                  <label className="mb-2 block text-sm font-bold text-[#171C5C]">
-                    Full Name
-                  </label>
-
-                  <input
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Enter your full name"
-                    className="w-full rounded-xl border border-gray-200 px-5 py-4 outline-none transition focus:border-[#39B5E8] focus:ring-2 focus:ring-[#39B5E8]/10"
-                  />
-                </div>
-
-                <div>
-                  <label className="mb-2 block text-sm font-bold text-[#171C5C]">
-                    Mobile Number
-                  </label>
-
-                  <input
-                    value={mobile}
-                    onChange={(e) => setMobile(e.target.value)}
-                    placeholder="10-digit mobile number"
-                    inputMode="numeric"
-                    maxLength={10}
-                    className="w-full rounded-xl border border-gray-200 px-5 py-4 outline-none transition focus:border-[#39B5E8] focus:ring-2 focus:ring-[#39B5E8]/10"
-                  />
-                </div>
-
-                <div>
-                  <label className="mb-2 block text-sm font-bold text-[#171C5C]">
-                    Email Address
-                  </label>
-
-                  <input
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email"
-                    type="email"
-                    className="w-full rounded-xl border border-gray-200 px-5 py-4 outline-none transition focus:border-[#39B5E8] focus:ring-2 focus:ring-[#39B5E8]/10"
-                  />
-                </div>
-
-                <div>
-                  <label className="mb-2 block text-sm font-bold text-[#171C5C]">
-                    Requirement
-                  </label>
-
-                  <textarea
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Tell us about your business loan requirement"
-                    rows={4}
-                    className="w-full resize-none rounded-xl border border-gray-200 px-5 py-4 outline-none transition focus:border-[#39B5E8] focus:ring-2 focus:ring-[#39B5E8]/10"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="w-full rounded-xl bg-[#071B72] px-6 py-4 font-bold text-white transition hover:bg-[#10278A] disabled:cursor-not-allowed disabled:opacity-60"
-                >
-                  {submitting ? "Submitting..." : "Submit Enquiry"}
-                </button>
-
-                <p className="text-center text-xs leading-5 text-gray-400">
-                  By submitting this form, you agree to be contacted regarding
-                  your enquiry. Loan approval is subject to lender eligibility
-                  and verification.
-                </p>
-              </form>
-            )}
-          </div>
-        </div>
-      )}
     </main>
   );
 }
+
+
