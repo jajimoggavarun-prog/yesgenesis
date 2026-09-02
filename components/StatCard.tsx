@@ -100,13 +100,14 @@ export default function StatCard({
         alt=""
         width={80}
         height={80}
-        className="
-          h-16
-          w-16
-          md:h-20
-          md:w-20
-          object-contain
-        "
+        className={`
+  h-16
+  w-16
+  md:h-20
+  md:w-20
+  object-contain
+  ${label === "Branch Locations" ? "scale-125" : ""}
+`}
       />
 
       {/* Number + Label */}
